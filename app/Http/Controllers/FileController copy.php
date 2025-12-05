@@ -828,7 +828,7 @@ class FileController extends Controller
             'tanggal4' => $formattedTanggal4,
             'tuk' => $request->tuk,
             'alamat1' => $alamat1,
-            'alamat2' => $alamat2,
+            'alamat2' => $alamat4,
             'memutuskan' => $request->tuk . ',',
             'metode' => $request->metode,
             'peserta' => $request->peserta . ' peserta',

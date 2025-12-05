@@ -247,9 +247,19 @@ class ConfirmController extends Controller
             throw new \Exception("Failed to fetch the PDF from the URL");
         }
 
-        // Generate QR codes once (before processing pages)
-        $qrResult1 = $this->qrService->generateQRForUser($verification, 'direktur', $direkturUser);
+        // Generate QR codes for page 1 (today) and page 2 (yesterday)
+        // Clone verification untuk halaman 2 dengan tanggal kemarin
+        $verificationPage2 = clone $verification;
+        $yesterdayDate = (clone $verification->created_at)->modify('-1 day');
+        $verificationPage2->created_at = $yesterdayDate;
+
+        // Generate QR untuk halaman 1 dengan tanggal sekarang
+        $qrResult1 = $this->qrService->generateQRForUser($verification, 'direktur_page1', $direkturUser);
         $qrUrl1 = $qrResult1['url'];
+
+        // Generate QR untuk halaman 2 dengan tanggal kemarin
+        $qrResult2 = $this->qrService->generateQRForUser($verificationPage2, 'direktur_page2', $direkturUser);
+        $qrUrl2 = $qrResult2['url'];
 
         // QR data automatically saved to qr_codes table by QRService
 
@@ -285,7 +295,7 @@ class ConfirmController extends Controller
                 $fpdi->write2DBarcode($qrUrl1, 'QRCODE,H', 30, 224, 20, 20);
             }
             if (($i === 2 && $verification->filetype === '2') || ($i === 2 && $verification->jenis_tuk === 'Mandiri')) {
-                $fpdi->write2DBarcode($qrUrl1, 'QRCODE,H', 30, 240, 20, 20);
+                $fpdi->write2DBarcode($qrUrl2, 'QRCODE,H', 30, 240, 20, 20);
             }
             if ($i === 3 && $verification->filetype === '1') {
                 $fpdi->write2DBarcode($qrUrl1, 'QRCODE,H', 30, 49, 20, 20);
@@ -307,8 +317,12 @@ class ConfirmController extends Controller
             throw new \Exception("Failed to save the verification file to storage.");
         }
 
-        // Use the same QR code for paperless processing
-        $qrUrlPaperless = $qrUrl1;
+        // Generate QR codes for paperless processing (page 1 today, page 2 yesterday)
+        $qrResultPaperless1 = $this->qrService->generateQRForUser($verification, 'direktur_paperless_page1', $direkturUser);
+        $qrUrlPaperless1 = $qrResultPaperless1['url'];
+
+        $qrResultPaperless2 = $this->qrService->generateQRForUser($verificationPage2, 'direktur_paperless_page2', $direkturUser);
+        $qrUrlPaperless2 = $qrResultPaperless2['url'];
 
         // Store the file in a temporary location
         $tempPaperlessPath = tempnam(sys_get_temp_dir(), 'pdf');
@@ -334,13 +348,13 @@ class ConfirmController extends Controller
             $fpdiPaperless->useTemplate($templatePaperless);
 
             if($index === 1) {
-                $fpdiPaperless->write2DBarcode($qrUrlPaperless, 'QRCODE,H', 30, 224, 20, 20);
+                $fpdiPaperless->write2DBarcode($qrUrlPaperless1, 'QRCODE,H', 30, 224, 20, 20);
             }
             if (($index === 2 && $verification->filetype === '2') || ($index === 2 && $verification->jenis_tuk === 'Mandiri')) {
-                $fpdiPaperless->write2DBarcode($qrUrlPaperless, 'QRCODE,H', 30, 240, 20, 20);
+                $fpdiPaperless->write2DBarcode($qrUrlPaperless2, 'QRCODE,H', 30, 240, 20, 20);
             }
             if ($index === 3 && $verification->filetype === '1') {
-                $fpdiPaperless->write2DBarcode($qrUrlPaperless, 'QRCODE,H', 30, 49, 20, 20);
+                $fpdiPaperless->write2DBarcode($qrUrlPaperless1, 'QRCODE,H', 30, 49, 20, 20);
             }
         }
 

@@ -90,7 +90,7 @@ class QRVerificationController extends Controller
             return view('qr.success', [
                 'qrCode' => $qrCode,
                 'verification' => $qrCode->verification,
-                'scannedAt' => now()
+                'scannedAt' => $qrCode->verification ? $qrCode->verification->created_at : now()
             ]);
 
         } catch (\Exception $e) {

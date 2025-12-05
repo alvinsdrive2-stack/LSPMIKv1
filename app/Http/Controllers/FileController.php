@@ -11,6 +11,7 @@ use ZipArchive;
 use Illuminate\Support\Facades\DB;
 use Ramsey\Uuid\Uuid;
 use App\Services\QRService;
+use App\Services\VerificationCheckboxService;
 
 ini_set('max_execution_time', 3800);
 
@@ -56,26 +57,7 @@ class FileController extends Controller
         return view('verificator.index', compact('all_verifications'));
     }
 
-    private function drawChecks($fpdi, $request, array $fieldPositions)
-    {
-        foreach ($fieldPositions as $field => [$x, $y]) {
-            if (($request->$field ?? null) === "Yes" || ($field === 'pendingin' && isset($request->pendingin))) {
-                $fpdi->SetFont('dejavusans', '', 12);
-                $fpdi->SetXY($x, $y);
-                $fpdi->Write(0, "✓");
-                $fpdi->SetXY($x + 28, $y);
-                $fpdi->Write(0, "✓");
-
-                // special case: pendingin also writes text at different spot
-                if ($field === 'pendingin' && isset($request->pendingin)) {
-                    $fpdi->SetFont('Times', '', 10);
-                    $fpdi->SetXY(99, 90);
-                    $fpdi->Write(0, $request->pendingin);
-                }
-            }
-        }
-    }
-
+    
     public function verify(Request $request)
     {
         $verification = Verification::where('id', $request->id)->first();
@@ -93,78 +75,18 @@ class FileController extends Controller
         $portofolioCount = is_array($skemaPortofolio) ? count($skemaPortofolio) : 0;
         $indexObservasi = 0;
         $indexPortofolio = 0;
-        $isSesuai = $request->gedung && $request->bangunan && $request->ruangan && $request->pendingin && $request->internet && $request->proyektor && $request->mejaasesor && $request->mejaasesi && $request->pc && $request->komunikasi && $request->dokumentasi && $request->pulpen && $request->pensil && $request->tipex && $request->penghapus && $request->spidol && $request->penggaris && $request->hvs && $request->apk && $request->p3k && $request->rambu ? true : false;
+        // Debug: Log checkbox data for troubleshooting
+        \Log::info('Verification checkbox data:', VerificationCheckboxService::getCheckboxData($request));
 
-        $fieldPositions = [
-            'gedung'      => [148,  67],
-            'bangunan'    => [148,  76],
-            'ruangan'     => [148,  83],
-            'pendingin'   => [148,  90], // also needs custom handling below
-            'internet'    => [148,  97],
-            'proyektor'   => [148, 104],
-            'pc'          => [148, 111],
-            'mejaasesor'  => [148, 119],
-            'mejaasesi'   => [148, 128],
-            'komunikasi'  => [148, 139],
-            'dokumentasi' => [148, 146],
-            'pulpen'      => [148, 153],
-            'pensil'      => [148, 160],
-            'tipex'       => [148, 167],
-            'penghapus'   => [148, 174],
-            'spidol'      => [148, 181],
-            'penggaris'   => [148, 188],
-            'hvs'         => [148, 195],
-            'apd'         => [148, 202],
-            'apk'         => [148, 209],
-            'p3k'         => [148, 219],
-            'rambu'       => [148, 226],
-        ];
+        // Use service for validation
+        $isSesuai = VerificationCheckboxService::validateAllRequiredCheckboxes($request);
 
         if (!$file || !$filePaperless) {
             throw new \Exception("Failed to fetch the PDF from the URL");
         }
 
-        $requestTools = [
-            'theodolite' => ['Theodolite'],
-            'meteran' => ['Meteran', 'Mistar/Meteran'],
-            'penggaris' => ['Penggaris'],
-            'waterpass' => ['Waterpass'],
-            'autocad' => ['Autocad'],
-            'perancah' => ['Perancah'],
-            'bouwplank' => ['Bouwplank'],
-            'patok' => ['Patok / Bench Mark'],
-            'jidar' => ['Jidar'],
-            'bandul' => ['Lot / Bandul', 'Lot'],
-            'palu_karet' => ['Palu Karet'],
-            'palu_besi' => ['Palu'],
-            'tang_jepit' => ['Tang Jepit'],
-            'tang_potong' => ['Tang Potong'],
-            'gergaji_kayu' => ['Gergaji Kayu'],
-            'gergaji_besi' => ['Gergaji Besi'],
-            'gerinda' => ['Mesin Gerinda'],
-            'pembengkok' => ['Alat Pembengkok Besi'],
-            'pahat' => ['Pahat Kayu'],
-            'obeng' => ['Obeng'],
-            'cangkul' => ['Cangkul'],
-            'sendok_semen' => ['Sendok Semen'],
-            'ember' => ['Ember'],
-            'pengerik' => ['Alat Pengerik / Kape', 'Kape/spatula'],
-            'roll_cat' => ['Kuas Roll Cat'],
-            'kuas_cat' => ['Kuas'],
-            'nampan' => ['Nampan Cat'],
-            'benang' => ['Benang'],
-            'paku' => ['Paku'],
-            'ampelas' => ['Ampelas', 'Kertas amplas'],
-            'triplek' => ['Triplek'],
-            'lakban' => ['Masking Tape / Lakban', 'Masking Tape'],
-            'dempul' => ['Dempul'],
-            'papan_applicator' => ['Papan Applicator'],
-            'mesin_bor' => ['Mesin Bor'],
-            'mesin_serut' => ['Mesin Serut'],
-            'mesin_gergaji' => ['Mesin Gergaji'],
-            'penggaris_siku' => ['Penggaris Siku'],
-            'cat' => ['Cat'],
-        ];
+        // Use service for tools mapping
+        $requestTools = VerificationCheckboxService::getPraktikToolsMapping();
 
         // Store the file in a temporary location
         $tempFpdiPath = tempnam(sys_get_temp_dir(), 'pdf');
@@ -280,7 +202,7 @@ class FileController extends Controller
             }
             // For observasi mandiri
             if ($i >= 5 && $i < 5 + $observasiCount && $verification->jenis_tuk === 'Mandiri') {
-                $this->drawChecks($fpdi, $request, $fieldPositions);
+                VerificationCheckboxService::drawPersyaratanCheckmarks($fpdi, $request);
                 $jabkerBaru = resource_path('json/skema.json');
                 $jabkerBaru = json_decode(file_get_contents($jabkerBaru), true)['myskemabnsp'];
                 $jabkerBaru = collect($jabkerBaru)->firstWhere('nama', $skemaObservasi[$indexObservasi]);
@@ -301,29 +223,14 @@ class FileController extends Controller
                     ];
                 }
                 if ($jabker->peralatan !== null) {
-                    $initialY = 233;
                     $peralatanArray = array_filter(array_map('trim', explode(',', $jabker->peralatan)));
-
-                    foreach ($peralatanArray as $peralatan) {
-                        foreach ($requestTools as $requestName => $peralatanName) {
-                            $labels = (array) $peralatanName; // ensure it's always an array
-
-                            foreach ($labels as $label) {
-                                if (($request->$requestName ?? null) === "Yes" && strcasecmp($peralatan, $label) === 0) {
-                                    $fpdi->SetFont('dejavusans', '', 12);
-                                    $fpdi->SetXY(148, $initialY);
-                                    $fpdi->Write(0, "✓");
-                                }
-                            }
-                        }
-                        $initialY += 7;
-                    }
+                    VerificationCheckboxService::drawPraktikToolsCheckmarks($fpdi, $request, $peralatanArray);
                 }
                 $indexObservasi++;
             }
             // For Portofolio mandiri
             if ($i >= (5 + $observasiCount + ($isBothMethod ? 2 : 0)) && $i < (5 + $observasiCount + $portofolioCount + ($isBothMethod ? 2 : 0)) && $verification->jenis_tuk === 'Mandiri') {
-                $this->drawChecks($fpdi, $request, $fieldPositions);
+                VerificationCheckboxService::drawPersyaratanCheckmarks($fpdi, $request);
                 $jabkerBaru = resource_path('json/skema.json');
                 $jabkerBaru = json_decode(file_get_contents($jabkerBaru), true)['myskemabnsp'];
                 $jabkerBaru = collect($jabkerBaru)->firstWhere('nama', $skemaPortofolio[$indexPortofolio]);
@@ -344,29 +251,14 @@ class FileController extends Controller
                     ];
                 }
                 if ($jabker->peralatan !== null) {
-                    $initialY = 233;
                     $peralatanArray = array_filter(array_map('trim', explode(',', $jabker->peralatan)));
-
-                    foreach ($peralatanArray as $peralatan) {
-                        foreach ($requestTools as $requestName => $peralatanName) {
-                            $labels = (array) $peralatanName; // ensure it's always an array
-
-                            foreach ($labels as $label) {
-                                if (($request->$requestName ?? null) === "Yes" && strcasecmp($peralatan, $label) === 0) {
-                                    $fpdi->SetFont('dejavusans', '', 12);
-                                    $fpdi->SetXY(148, $initialY);
-                                    $fpdi->Write(0, "✓");
-                                }
-                            }
-                        }
-                        $initialY += 7;
-                    }
+                    VerificationCheckboxService::drawPraktikToolsCheckmarks($fpdi, $request, $peralatanArray);
                 }
                 $indexPortofolio++;
             }
             // For sewaktu observasi file 2
             if ($i >= 6 + $baCount && $i < 6 + $baCount + $observasiCount && $verification->filetype === '2' && $verification->jenis_tuk === 'Sewaktu') {
-                $this->drawChecks($fpdi, $request, $fieldPositions);
+                VerificationCheckboxService::drawPersyaratanCheckmarks($fpdi, $request);
                 $jabkerBaru = resource_path('json/skema.json');
                 $jabkerBaru = json_decode(file_get_contents($jabkerBaru), true)['myskemabnsp'];
                 $jabkerBaru = collect($jabkerBaru)->firstWhere('nama', $skemaObservasi[$indexObservasi]);
@@ -387,29 +279,14 @@ class FileController extends Controller
                     ];
                 }
                 if ($jabker->peralatan !== null) {
-                    $initialY = 233;
                     $peralatanArray = array_filter(array_map('trim', explode(',', $jabker->peralatan)));
-
-                    foreach ($peralatanArray as $peralatan) {
-                        foreach ($requestTools as $requestName => $peralatanName) {
-                            $labels = (array) $peralatanName; // ensure it's always an array
-
-                            foreach ($labels as $label) {
-                                if (($request->$requestName ?? null) === "Yes" && strcasecmp($peralatan, $label) === 0) {
-                                    $fpdi->SetFont('dejavusans', '', 12);
-                                    $fpdi->SetXY(148, $initialY);
-                                    $fpdi->Write(0, "✓");
-                                }
-                            }
-                        }
-                        $initialY += 7;
-                    }
+                    VerificationCheckboxService::drawPraktikToolsCheckmarks($fpdi, $request, $peralatanArray);
                 }
                 $indexObservasi++;
             }
             // For sewaktu portofolio file 2
             if ($i >= (7 + $baCount + $observasiCount + ($isBothMethod ? 1 : 0)) && $i < (7 + $baCount + $observasiCount + $portofolioCount + ($isBothMethod ? 1 : 0)) && $verification->filetype === '2' && $verification->jenis_tuk === 'Sewaktu') {
-                $this->drawChecks($fpdi, $request, $fieldPositions);
+                VerificationCheckboxService::drawPersyaratanCheckmarks($fpdi, $request);
                 $jabkerBaru = resource_path('json/skema.json');
                 $jabkerBaru = json_decode(file_get_contents($jabkerBaru), true)['myskemabnsp'];
                 $jabkerBaru = collect($jabkerBaru)->firstWhere('nama', $skemaPortofolio[$indexPortofolio]);
@@ -430,29 +307,14 @@ class FileController extends Controller
                     ];
                 }
                 if ($jabker->peralatan !== null) {
-                    $initialY = 233;
                     $peralatanArray = array_filter(array_map('trim', explode(',', $jabker->peralatan)));
-
-                    foreach ($peralatanArray as $peralatan) {
-                        foreach ($requestTools as $requestName => $peralatanName) {
-                            $labels = (array) $peralatanName; // ensure it's always an array
-
-                            foreach ($labels as $label) {
-                                if (($request->$requestName ?? null) === "Yes" && strcasecmp($peralatan, $label) === 0) {
-                                    $fpdi->SetFont('dejavusans', '', 12);
-                                    $fpdi->SetXY(148, $initialY);
-                                    $fpdi->Write(0, "✓");
-                                }
-                            }
-                        }
-                        $initialY += 7;
-                    }
+                    VerificationCheckboxService::drawPraktikToolsCheckmarks($fpdi, $request, $peralatanArray);
                 }
                 $indexPortofolio++;
             }
             // For sewaktu observasi file 1
             if ($i >= 7 + $baCount && $i < 7 + $baCount + $observasiCount && $verification->filetype === '1' && $verification->jenis_tuk === 'Sewaktu') {
-                $this->drawChecks($fpdi, $request, $fieldPositions);
+                VerificationCheckboxService::drawPersyaratanCheckmarks($fpdi, $request);
                 $jabkerBaru = resource_path('json/skema.json');
                 $jabkerBaru = json_decode(file_get_contents($jabkerBaru), true)['myskemabnsp'];
                 $jabkerBaru = collect($jabkerBaru)->firstWhere('nama', $skemaObservasi[$indexObservasi]);
@@ -473,29 +335,14 @@ class FileController extends Controller
                     ];
                 }
                 if ($jabker->peralatan !== null) {
-                    $initialY = 233;
                     $peralatanArray = array_filter(array_map('trim', explode(',', $jabker->peralatan)));
-
-                    foreach ($peralatanArray as $peralatan) {
-                        foreach ($requestTools as $requestName => $peralatanName) {
-                            $labels = (array) $peralatanName; // ensure it's always an array
-
-                            foreach ($labels as $label) {
-                                if (($request->$requestName ?? null) === "Yes" && strcasecmp($peralatan, $label) === 0) {
-                                    $fpdi->SetFont('dejavusans', '', 12);
-                                    $fpdi->SetXY(148, $initialY);
-                                    $fpdi->Write(0, "✓");
-                                }
-                            }
-                        }
-                        $initialY += 7;
-                    }
+                    VerificationCheckboxService::drawPraktikToolsCheckmarks($fpdi, $request, $peralatanArray);
                 }
                 $indexObservasi++;
             }
             // For sewaktu portofolio file 1
             if ($i >= (8 + $baCount + $observasiCount + ($isBothMethod ? 1 : 0)) && $i < (8 + $baCount + $observasiCount + $portofolioCount + ($isBothMethod ? 1 : 0)) && $verification->filetype === '1' && $verification->jenis_tuk === 'Sewaktu') {
-                $this->drawChecks($fpdi, $request, $fieldPositions);
+                VerificationCheckboxService::drawPersyaratanCheckmarks($fpdi, $request);
                 $jabkerBaru = resource_path('json/skema.json');
                 $jabkerBaru = json_decode(file_get_contents($jabkerBaru), true)['myskemabnsp'];
                 $jabkerBaru = collect($jabkerBaru)->firstWhere('nama', $skemaPortofolio[$indexPortofolio]);
@@ -516,23 +363,8 @@ class FileController extends Controller
                     ];
                 }
                 if ($jabker->peralatan !== null) {
-                    $initialY = 233;
                     $peralatanArray = array_filter(array_map('trim', explode(',', $jabker->peralatan)));
-
-                    foreach ($peralatanArray as $peralatan) {
-                        foreach ($requestTools as $requestName => $peralatanName) {
-                            $labels = (array) $peralatanName; // ensure it's always an array
-
-                            foreach ($labels as $label) {
-                                if (($request->$requestName ?? null) === "Yes" && strcasecmp($peralatan, $label) === 0) {
-                                    $fpdi->SetFont('dejavusans', '', 12);
-                                    $fpdi->SetXY(148, $initialY);
-                                    $fpdi->Write(0, "✓");
-                                }
-                            }
-                        }
-                        $initialY += 7;
-                    }
+                    VerificationCheckboxService::drawPraktikToolsCheckmarks($fpdi, $request, $peralatanArray);
                 }
                 $indexPortofolio++;
             }
@@ -748,7 +580,7 @@ class FileController extends Controller
             }
             // For observasi mandiri
             if ($i >= 5 && $i < 5 + $observasiCount && $verification->jenis_tuk === 'Mandiri') {
-                $this->drawChecks($fpdiPaperless, $request, $fieldPositions);
+                VerificationCheckboxService::drawPersyaratanCheckmarks($fpdiPaperless, $request);
                 $jabkerBaru = resource_path('json/skema.json');
                 $jabkerBaru = json_decode(file_get_contents($jabkerBaru), true)['myskemabnsp'];
                 $jabkerBaru = collect($jabkerBaru)->firstWhere('nama', $skemaObservasi[$indexObservasi]);
@@ -791,7 +623,7 @@ class FileController extends Controller
             }
             // For Portofolio mandiri
             if ($i >= (5 + $observasiCount + ($isBothMethod ? 2 : 0)) && $i < (5 + $observasiCount + $portofolioCount + ($isBothMethod ? 2 : 0)) && $verification->jenis_tuk === 'Mandiri') {
-                $this->drawChecks($fpdiPaperless, $request, $fieldPositions);
+                VerificationCheckboxService::drawPersyaratanCheckmarks($fpdiPaperless, $request);
                 $jabkerBaru = resource_path('json/skema.json');
                 $jabkerBaru = json_decode(file_get_contents($jabkerBaru), true)['myskemabnsp'];
                 $jabkerBaru = collect($jabkerBaru)->firstWhere('nama', $skemaPortofolio[$indexPortofolio]);
@@ -834,7 +666,7 @@ class FileController extends Controller
             }
             // For sewaktu observasi file 2
             if ($i >= 6 + $baCount && $i < 6 + $baCount + $observasiCount && $verification->filetype === '2' && $verification->jenis_tuk === 'Sewaktu') {
-                $this->drawChecks($fpdiPaperless, $request, $fieldPositions);
+                VerificationCheckboxService::drawPersyaratanCheckmarks($fpdiPaperless, $request);
                 $jabkerBaru = resource_path('json/skema.json');
                 $jabkerBaru = json_decode(file_get_contents($jabkerBaru), true)['myskemabnsp'];
                 $jabkerBaru = collect($jabkerBaru)->firstWhere('nama', $skemaObservasi[$indexObservasi]);
@@ -877,7 +709,7 @@ class FileController extends Controller
             }
             // For sewaktu portofolio file 2
             if ($i >= (7 + $baCount + $observasiCount + ($isBothMethod ? 1 : 0)) && $i < (7 + $baCount + $observasiCount + $portofolioCount + ($isBothMethod ? 1 : 0)) && $verification->filetype === '2' && $verification->jenis_tuk === 'Sewaktu') {
-                $this->drawChecks($fpdiPaperless, $request, $fieldPositions);
+                VerificationCheckboxService::drawPersyaratanCheckmarks($fpdiPaperless, $request);
                 $jabkerBaru = resource_path('json/skema.json');
                 $jabkerBaru = json_decode(file_get_contents($jabkerBaru), true)['myskemabnsp'];
                 $jabkerBaru = collect($jabkerBaru)->firstWhere('nama', $skemaPortofolio[$indexPortofolio]);
@@ -920,7 +752,7 @@ class FileController extends Controller
             }
             // For sewaktu observasi file 1
             if ($i >= 7 + $baCount && $i < 7 + $baCount + $observasiCount && $verification->filetype === '1' && $verification->jenis_tuk === 'Sewaktu') {
-                $this->drawChecks($fpdiPaperless, $request, $fieldPositions);
+                VerificationCheckboxService::drawPersyaratanCheckmarks($fpdiPaperless, $request);
                 $jabkerBaru = resource_path('json/skema.json');
                 $jabkerBaru = json_decode(file_get_contents($jabkerBaru), true)['myskemabnsp'];
                 $jabkerBaru = collect($jabkerBaru)->firstWhere('nama', $skemaObservasi[$indexObservasi]);
@@ -963,7 +795,7 @@ class FileController extends Controller
             }
             // For sewaktu portofolio file 1
             if ($i >= (8 + $baCount + $observasiCount + ($isBothMethod ? 1 : 0)) && $i < (8 + $baCount + $observasiCount + $portofolioCount + ($isBothMethod ? 1 : 0)) && $verification->filetype === '1' && $verification->jenis_tuk === 'Sewaktu') {
-                $this->drawChecks($fpdiPaperless, $request, $fieldPositions);
+                VerificationCheckboxService::drawPersyaratanCheckmarks($fpdiPaperless, $request);
                 $jabkerBaru = resource_path('json/skema.json');
                 $jabkerBaru = json_decode(file_get_contents($jabkerBaru), true)['myskemabnsp'];
                 $jabkerBaru = collect($jabkerBaru)->firstWhere('nama', $skemaPortofolio[$indexPortofolio]);
@@ -1747,6 +1579,7 @@ class FileController extends Controller
             'tanggal2' => $formattedTanggal2,
             'tanggal3' => $formattedTanggal3,
             'tanggal4' => $formattedTanggal4,
+            'tanggal5' => $formattedTanggal3,
             'tuk' => $request->tuk,
             'alamat1' => $alamat1,
             'alamat2' => $alamat2,

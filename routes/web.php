@@ -7,6 +7,7 @@ use App\Http\Controllers\FileController;
 use App\Http\Controllers\GenerateController;
 use App\Http\Controllers\PendaftaranController;
 use App\Http\Controllers\QRVerificationController;
+use App\Http\Controllers\TestVerificationController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -81,10 +82,14 @@ Route::get('/register-font', function () {
     return "Font registered as: " . $fontName;
 });
 
+// Test routes for verification
+Route::get('/test-verification', [TestVerificationController::class, 'index']);
+Route::post('/test-verification', [TestVerificationController::class, 'test']);
+
 Route::get('/test', function () {
     $isLocal = app()->environment('local');
 
-    $basePath = $isLocal 
+    $basePath = $isLocal
             ? str_replace('\\', '/', base_path())
             : '/home/lspgatensi/new-balai/veriftuk';
 

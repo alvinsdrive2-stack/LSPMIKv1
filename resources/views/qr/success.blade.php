@@ -344,9 +344,9 @@
                 <div class="info-content">
                     <div class="info-label">Jabatan</div>
                     <div class="info-value">
-                        
-                            {{ ucfirst($qrCode->type) }}
-                        
+
+                            {{ ucfirst(preg_replace('/\d+/', '', preg_replace('/_.*$/', '', $qrCode->type))) }}
+
                     </div>
                 </div>
             </div>
@@ -371,7 +371,22 @@
                 </svg>
                 <div class="info-content">
                     <div class="info-label">Diverifikasi Pada</div>
-                    <div class="info-value">{{ $scannedAt->format('d M Y, H:i') }} WIB</div>
+                    <div class="info-value">
+                        @php
+                            $jabatan = ucfirst(preg_replace('/\d+/', '', preg_replace('/_.*$/', '', $qrCode->type)));
+                            $displayDate = $scannedAt;
+
+                            if (strtolower($jabatan) === 'verifikator') {
+                                $displayDate = $scannedAt->copy()->addDay();
+                            }
+
+                            // Jika jabatannya direktur_page1, tambahkan 1 hari
+                            if ($qrCode->type === 'direktur_page1' || $qrCode->type === 'direktur_paperless_page1') {
+                                $displayDate = $scannedAt->copy()->addDay();
+                            }
+                        @endphp
+                        {{ $displayDate->format('d F Y') }}
+                    </div>
                 </div>
             </div>
         </div>
