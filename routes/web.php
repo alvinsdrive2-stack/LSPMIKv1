@@ -25,7 +25,7 @@ Route::middleware(['guest'])->group(function () {
     Route::get('/login-verifikator', [AuthController::class, 'viewVerifikator']);
     Route::get('/login-validator', [AuthController::class, 'viewValidator']);
     Route::get('/login-tuk', [AuthController::class, 'viewTUK']);
-    Route::post('login', [AuthController::class, 'login']);
+    Route::post('login', [AuthController::class, 'login'])->middleware('login.rate.limit');
     Route::get("/generate-sewaktu", [GenerateController::class, 'revisiTUK'])->name("generateSewaktu");
 });
 

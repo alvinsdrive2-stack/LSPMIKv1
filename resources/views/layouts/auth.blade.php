@@ -144,6 +144,64 @@
             .shake {
                 animation: shake 0.5s ease-in-out;
             }
+
+            .shake-animation {
+                animation: shake 0.5s ease-in-out;
+            }
+
+            /* Spin animation for blocked state */
+            @keyframes spin-slow {
+                from { transform: rotate(0deg); }
+                to { transform: rotate(360deg); }
+            }
+
+            .animate-spin-slow {
+                animation: spin-slow 3s linear infinite;
+            }
+
+            /* Pulse animation for countdown */
+            @keyframes pulse-red {
+                0%, 100% {
+                    opacity: 1;
+                    transform: scale(1);
+                }
+                50% {
+                    opacity: 0.7;
+                    transform: scale(1.05);
+                }
+            }
+
+            .pulse-animation {
+                animation: pulse-red 1s ease-in-out infinite;
+            }
+
+            /* Glow animation for blocked inputs */
+            @keyframes glow-red {
+                0%, 100% {
+                    box-shadow: 0 0 5px rgba(239, 68, 68, 0.5);
+                }
+                50% {
+                    box-shadow: 0 0 20px rgba(239, 68, 68, 0.8);
+                }
+            }
+
+            .input-glow-red {
+                animation: glow-red 2s ease-in-out infinite;
+            }
+
+            /* Progress bar for attempts */
+            .attempt-progress {
+                height: 4px;
+                background: rgba(255, 255, 255, 0.1);
+                border-radius: 2px;
+                overflow: hidden;
+            }
+
+            .attempt-progress-fill {
+                height: 100%;
+                background: linear-gradient(90deg, #10b981, #eab308, #ef4444);
+                transition: width 0.3s ease;
+            }
         </style>
     </head>
     <body class="animated-bg min-h-screen flex items-center justify-center relative overflow-hidden">
