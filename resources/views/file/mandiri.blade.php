@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Verifikasi TUK Mandiri - LSP LPK Gataksindo</title>
+        <title>Verifikasi TUK Mandiri - LSP LPK MIK</title>
         <style>
             .container {
                 display: flex;

@@ -155,8 +155,8 @@ class GenerateController extends Controller
                 $fpdi = new Fpdi();
 
                 // Set document information (Optional)
-                $fpdi->SetCreator('LSP Gatensi');
-                $fpdi->SetAuthor('LSP Gatensi');
+                $fpdi->SetCreator('LSP MIK');
+                $fpdi->SetAuthor('LSP MIK');
                 
                 // Load the existing PDF
                 $pageCount = $fpdi->setSourceFile($tempFpdiPath);
@@ -480,22 +480,26 @@ class GenerateController extends Controller
                         $alatSesuai = "Yes";
                         
                         if($jabker->peralatan !== null) {
+                            // First, set all equipment to "Tidak Ada" by default
                             foreach ($peralatanArray as $index => $peralatan) {
                                 $i = $index + 1;
                                 $formSkema["alat$i"] = $peralatan;
-                                $formSkema["praktik{$i}_ada"] = 'No';
-                                $formSkema["praktik{$i}_tidakada"] = "Yes";
-                                $formSkema["praktik{$i}_sesuai"] = 'No';
-                                $formSkema["praktik{$i}_tidaksesuai"] = "Yes";
+                                $formSkema["praktik{$i}_ada"] = 'Off';
+                                $formSkema["praktik{$i}_tidakada"] = 'Yes';
+                                $formSkema["praktik{$i}_sesuai"] = 'Off';
+                                $formSkema["praktik{$i}_tidaksesuai"] = 'Yes';
                             }
-                            
+
+                            // Then, only check "Ada" for equipment that exists in requestTools
                             foreach ($requestTools as $requestName => $peralatanName) {
-                                $key = array_search($peralatanName, $peralatanArray) + 1;
-            
-                                $formSkema["praktik{$key}_ada"] = 'Yes';
-                                $formSkema["praktik{$key}_tidakada"] = 'Off';
-                                $formSkema["praktik{$key}_sesuai"] = 'Yes';
-                                $formSkema["praktik{$key}_tidaksesuai"] = 'Off';
+                                $key = array_search($peralatanName, $peralatanArray);
+                                if ($key !== false) {
+                                    $key = $key + 1;
+                                    $formSkema["praktik{$key}_ada"] = 'Yes';
+                                    $formSkema["praktik{$key}_tidakada"] = 'Off';
+                                    $formSkema["praktik{$key}_sesuai"] = 'Yes';
+                                    $formSkema["praktik{$key}_tidaksesuai"] = 'Off';
+                                }
                             }
                         }
 
@@ -508,8 +512,8 @@ class GenerateController extends Controller
 
                         // Initialize FPDI with TCPDF
                         $fpdiSkema = new Fpdi();
-                        $fpdiSkema->SetCreator('LSP Gatensi');
-                        $fpdiSkema->SetAuthor('LSP Gatensi');
+                        $fpdiSkema->SetCreator('LSP MIK');
+                        $fpdiSkema->SetAuthor('LSP MIK');
                         
                         // Load the existing PDF
                         $pageCount = $fpdiSkema->setSourceFile($tempFpdiSkema);
@@ -598,8 +602,8 @@ class GenerateController extends Controller
                 $fpdiSk = new Fpdi();
 
                 // Set document information (Optional)
-                $fpdiSk->SetCreator('LSP LPK Gataksindo');
-                $fpdiSk->SetAuthor('LSP LPK Gataksindo');
+                $fpdiSk->SetCreator('LSP LPK MIK');
+                $fpdiSk->SetAuthor('LSP LPK MIK');
                 
                 // Load the existing PDF
                 $pageCountSk = $fpdiSk->setSourceFile($tempSkPath);
@@ -631,8 +635,8 @@ class GenerateController extends Controller
                 file_put_contents($tempFinalSkPath, $finalSk);
 
                 $mergedPdf = new Fpdi();
-                $mergedPdf->SetCreator(creator: 'LSP LPK Gataksindo');
-                $mergedPdf->SetAuthor('LSP LPK Gataksindo');
+                $mergedPdf->SetCreator(creator: 'LSP LPK MIK');
+                $mergedPdf->SetAuthor('LSP LPK MIK');
 
                 $pageCountMain = $mergedPdf->setSourceFile($tempFinalPdfPath);
                 for ($i = 1; $i <= $pageCountMain; $i++) {

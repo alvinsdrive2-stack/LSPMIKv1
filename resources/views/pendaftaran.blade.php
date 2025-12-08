@@ -7,7 +7,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    <title>Pendaftaran TUK - LSP LPK Gataksindo</title>
+    <title>Pendaftaran TUK - LSP LPK MIK</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">

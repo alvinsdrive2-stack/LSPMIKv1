@@ -4,7 +4,7 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-        <title>Verifikasi TUK - LSP LPK Gataksindo</title>
+        <title>Verifikasi TUK - LSP LPK MIK</title>
         @vite('resources/css/app.css')
     </head>
     <body>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>QR Valid - Verifikasi TUK - LSP LPK Gataksindo</title>
+    <title>QR Valid - Verifikasi TUK - LSP LPK MIK</title>
     @vite('resources/css/app.css')
     <style>
         * {
@@ -296,13 +296,13 @@
 <body>
     <!-- Logo Background -->
     <div class="logo-section">
-        <img src="/images/logo-banner.png" alt="LSP Gataksindo" class="logo-img" />
+        <img src="/images/logo-banner.png" alt="LSP MIK" class="logo-img" />
     </div>
 
     <div class="container">
         <!-- Logo sebagai pengganti checkmark -->
 <div class="header-logo">
-    <img src="/images/logo-banner.png" alt="LSP Gataksindo" class="header-logo-img" />
+    <img src="/images/logo-banner.png" alt="LSP MIK" class="header-logo-img" />
 </div>
 
         <!-- Title -->

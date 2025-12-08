@@ -128,14 +128,10 @@ class VerificationCheckboxService
                     $fpdi->SetXY(99, 90);
                     $fpdi->Write(0, $request->pendingin);
                 }
-            }
-            // Jika tidak dicentang, TIDAK melakukan apapun (ini yang salah di kode lama)
+        }
         }
     }
 
-    /**
-     * Draw checkmarks for praktik tools
-     */
     public static function drawPraktikToolsCheckmarks($fpdi, $request, array $peralatanArray, int $startY = 233, int $lineSpacing = 7): void
     {
         $requestTools = self::getPraktikToolsMapping();

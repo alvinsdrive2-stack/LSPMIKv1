@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>QR Error - Verifikasi TUK - LSP LPK Gataksindo</title>
+    <title>QR Error - Verifikasi TUK - LSP LPK MIK</title>
     @vite('resources/css/app.css')
 </head>
 <body>
@@ -47,7 +47,7 @@
                     </li>
                     <li class="flex items-start">
                         <i class="fas fa-check-circle text-green-400 mr-2 mt-1"></i>
-                        <span>QR Code harus dari dokumen resmi LSP Gataksindo</span>
+                        <span>QR Code harus dari dokumen resmi LSP MIK</span>
                     </li>
                     <li class="flex items-start">
                         <i class="fas fa-check-circle text-green-400 mr-2 mt-1"></i>

@@ -96,8 +96,8 @@ class FileController extends Controller
         $fpdi = new Fpdi();
 
         // Set document information (Optional)
-        $fpdi->SetCreator('LSP LPK Gataksindo');
-        $fpdi->SetAuthor('LSP LPK Gataksindo');
+        $fpdi->SetCreator('LSP LPK MIK');
+        $fpdi->SetAuthor('LSP LPK MIK');
         
         // Load the existing PDF
         $pageCount = $fpdi->setSourceFile($tempFpdiPath);
@@ -141,6 +141,7 @@ class FileController extends Controller
                     $fpdi->Write(0, '------');
                 }
                 // Gunakan URL otomatis dari QRService (localhost)
+                // Updated coordinates based on MIK version
                 $fpdi->write2DBarcode($qrVerifikatorMandiri['url'], 'QRCODE,H', 156, 170, 20, 20);
             }
             if ($i === 4 && $verification->filetype === '2' && $verification->jenis_tuk === 'Sewaktu') {
@@ -487,8 +488,8 @@ class FileController extends Controller
         $fpdiPaperless = new Fpdi();
 
         // Set document information (Optional)
-        $fpdiPaperless->SetCreator('LSP LPK Gataksindo');
-        $fpdiPaperless->SetAuthor('LSP LPK Gataksindo');
+        $fpdiPaperless->SetCreator('LSP LPK MIK');
+        $fpdiPaperless->SetAuthor('LSP LPK MIK');
         
         // Load the existing PDF
         $paperlessCount = $fpdiPaperless->setSourceFile($tempPaperlessPath);
@@ -994,8 +995,8 @@ class FileController extends Controller
         $fpdi = new Fpdi();
 
         // Set document information (Optional)
-        $fpdi->SetCreator('LSP LPK Gataksindo');
-        $fpdi->SetAuthor('LSP LPK Gataksindo');
+        $fpdi->SetCreator('LSP LPK MIK');
+        $fpdi->SetAuthor('LSP LPK MIK');
         
         // Load the existing PDF
         $pageCount = $fpdi->setSourceFile($tempFpdiPath);
@@ -1081,8 +1082,8 @@ class FileController extends Controller
         $fpdiPaperless = new Fpdi();
 
         // Set document information (Optional)
-        $fpdiPaperless->SetCreator('LSP LPK Gataksindo');
-        $fpdiPaperless->SetAuthor('LSP LPK Gataksindo');
+        $fpdiPaperless->SetCreator('LSP LPK MIK');
+        $fpdiPaperless->SetAuthor('LSP LPK MIK');
         
         // Load the existing PDF
         $paperlessCount = $fpdiPaperless->setSourceFile($tempPaperlessPath);
@@ -1183,8 +1184,8 @@ class FileController extends Controller
         $fpdi = new Fpdi();
 
         // Set document information (Optional)
-        $fpdi->SetCreator('LSP LPK Gataksindo');
-        $fpdi->SetAuthor('LSP LPK Gataksindo');
+        $fpdi->SetCreator('LSP LPK MIK');
+        $fpdi->SetAuthor('LSP LPK MIK');
         
         // Load the existing PDF
         $pageCount = $fpdi->setSourceFile($tempFpdiPath);
@@ -1270,8 +1271,8 @@ class FileController extends Controller
         $fpdiPaperless = new Fpdi();
 
         // Set document information (Optional)
-        $fpdiPaperless->SetCreator('LSP LPK Gataksindo');
-        $fpdiPaperless->SetAuthor('LSP LPK Gataksindo');
+        $fpdiPaperless->SetCreator('LSP LPK MIK');
+        $fpdiPaperless->SetAuthor('LSP LPK MIK');
         
         // Load the existing PDF
         $paperlessCount = $fpdiPaperless->setSourceFile($tempPaperlessPath);
@@ -1511,6 +1512,7 @@ class FileController extends Controller
         $month3 = $monthsIndonesian[$currentDate->format('n')];
         $year3 = $currentDate->format('Y');
         $formattedTanggal3 = "$dayOfWeekIndonesian3 / $day3 $month3 $year3";
+        $formattedTanggal5 = "$dayOfWeekIndonesian3 , $day3 $month3 $year3";
 
         // Tanggal TTD
         $yesterday = (clone $currentDate)->modify('-1 day');
@@ -1579,7 +1581,7 @@ class FileController extends Controller
             'tanggal2' => $formattedTanggal2,
             'tanggal3' => $formattedTanggal3,
             'tanggal4' => $formattedTanggal4,
-            'tanggal5' => $formattedTanggal3,
+            'tanggal5' => $formattedTanggal5,
             'tuk' => $request->tuk,
             'alamat1' => $alamat1,
             'alamat2' => $alamat2,
@@ -1626,8 +1628,8 @@ class FileController extends Controller
         $fpdi = new Fpdi();
 
         // Set document information (Optional)
-        $fpdi->SetCreator('LSP LPK Gataksindo');
-        $fpdi->SetAuthor('LSP LPK Gataksindo');
+        $fpdi->SetCreator('LSP LPK MIK');
+        $fpdi->SetAuthor('LSP LPK MIK');
         
         // Load the existing PDF
         $pageCount = $fpdi->setSourceFile($tempFpdiPath);
@@ -1883,18 +1885,31 @@ class FileController extends Controller
                                     $formSkema["spesifikasi$i"] = $peralatan;
                                 }
                             }
-                            
+
+                            // First, set all equipment to "Tidak Ada" by default
+                            foreach ($peralatanArray as $index => $peralatan) {
+                                $i = $index + 1;
+                                $formSkema["praktik{$i}_ada"] = 'Off';
+                                $formSkema["praktik{$i}_tidakada"] = 'Yes';
+                                $formSkema["praktik{$i}_sesuai"] = 'Off';
+                                $formSkema["praktik{$i}_tidaksesuai"] = 'Yes';
+                            }
+
+                            // Then, only check "Ada" for equipment that is checked in the request
                             foreach ($requestTools as $requestName => $peralatanName) {
-                                $key = array_search($peralatanName, $peralatanArray) + 1;
-            
-                                if ($request->$requestName === null) {
-                                    $alatSesuai = "Off";
+                                $key = array_search($peralatanName, $peralatanArray);
+                                if ($key !== false) {
+                                    $key = $key + 1;
+
+                                    if ($request->$requestName === null) {
+                                        $alatSesuai = "Off";
+                                    }
+
+                                    $formSkema["praktik{$key}_ada"] = $request->$requestName;
+                                    $formSkema["praktik{$key}_tidakada"] = $request->$requestName === null ? 'Yes' : 'Off';
+                                    $formSkema["praktik{$key}_sesuai"] = $request->$requestName;
+                                    $formSkema["praktik{$key}_tidaksesuai"] = $request->$requestName === null ? 'Yes' : 'Off';
                                 }
-            
-                                $formSkema["praktik{$key}_ada"] = $request->$requestName;
-                                $formSkema["praktik{$key}_tidakada"] = $request->$requestName === null ? 'Yes' : 'Off';
-                                $formSkema["praktik{$key}_sesuai"] = $request->$requestName;
-                                $formSkema["praktik{$key}_tidaksesuai"] = $request->$requestName === null ? 'Yes' : 'Off';
                             }
                         }
 
@@ -2134,18 +2149,31 @@ class FileController extends Controller
                                     $formSkema["spesifikasi$i"] = $peralatan;
                                 }
                             }
-                            
+
+                            // First, set all equipment to "Tidak Ada" by default
+                            foreach ($peralatanArray as $index => $peralatan) {
+                                $i = $index + 1;
+                                $formSkema["praktik{$i}_ada"] = 'Off';
+                                $formSkema["praktik{$i}_tidakada"] = 'Yes';
+                                $formSkema["praktik{$i}_sesuai"] = 'Off';
+                                $formSkema["praktik{$i}_tidaksesuai"] = 'Yes';
+                            }
+
+                            // Then, only check "Ada" for equipment that is checked in the request
                             foreach ($requestTools as $requestName => $peralatanName) {
-                                $key = array_search($peralatanName, $peralatanArray) + 1;
-            
-                                if ($request->$requestName === null) {
-                                    $alatSesuai = "Off";
+                                $key = array_search($peralatanName, $peralatanArray);
+                                if ($key !== false) {
+                                    $key = $key + 1;
+
+                                    if ($request->$requestName === null) {
+                                        $alatSesuai = "Off";
+                                    }
+
+                                    $formSkema["praktik{$key}_ada"] = $request->$requestName;
+                                    $formSkema["praktik{$key}_tidakada"] = $request->$requestName === null ? 'Yes' : 'Off';
+                                    $formSkema["praktik{$key}_sesuai"] = $request->$requestName;
+                                    $formSkema["praktik{$key}_tidaksesuai"] = $request->$requestName === null ? 'Yes' : 'Off';
                                 }
-            
-                                $formSkema["praktik{$key}_ada"] = $request->$requestName;
-                                $formSkema["praktik{$key}_tidakada"] = $request->$requestName === null ? 'Yes' : 'Off';
-                                $formSkema["praktik{$key}_sesuai"] = $request->$requestName;
-                                $formSkema["praktik{$key}_tidaksesuai"] = $request->$requestName === null ? 'Yes' : 'Off';
                             }
                         }
 
@@ -2261,8 +2289,8 @@ class FileController extends Controller
         $metodeTerpisah = ($countMetode['Observasi'] ?? 0) > 0 && ($countMetode['Portofolio'] ?? 0) > 0;
 
         $fpdiMerge = new Fpdi();
-        $fpdiMerge->SetCreator('LSP LPK Gataksindo');
-        $fpdiMerge->SetAuthor('LSP LPK Gataksindo');
+        $fpdiMerge->SetCreator('LSP LPK MIK');
+        $fpdiMerge->SetAuthor('LSP LPK MIK');
         $pageCountMerge = $fpdiMerge->setSourceFile($finalMergedPath);
    
          for ($i = 1; $i <= $pageCountMerge; $i++) {
@@ -2307,8 +2335,8 @@ class FileController extends Controller
         
         // ==== Generate PDF without last page ====
         $fpdiNoLastPage = new Fpdi();
-        $fpdiNoLastPage->SetCreator('LSP LPK Gataksindo');
-        $fpdiNoLastPage->SetAuthor('LSP LPK Gataksindo');
+        $fpdiNoLastPage->SetCreator('LSP LPK MIK');
+        $fpdiNoLastPage->SetAuthor('LSP LPK MIK');
         $pageCount = $fpdiNoLastPage->setSourceFile($finalMergedPath);
         if ($request->jenisTUK === 'Sewaktu') {
             $pageCount = $pageCount - 1;

@@ -206,8 +206,8 @@ class FileController extends Controller
         $fpdi = new Fpdi();
 
         // Set document information (Optional)
-        $fpdi->SetCreator('LSP LPK Gataksindo');
-        $fpdi->SetAuthor('LSP LPK Gataksindo');
+        $fpdi->SetCreator('LSP LPK MIK');
+        $fpdi->SetAuthor('LSP LPK MIK');
         
         // Load the existing PDF
         $pageCount = $fpdi->setSourceFile($tempFpdiPath);
@@ -418,40 +418,40 @@ class FileController extends Controller
                     "{$metode}_telinga_ada" => $request->telinga,
                     "{$metode}_harness_ada" => $request->harness,
                     "{$metode}_kacamata_ada" => $request->kacamata,
-                    "{$metode}_gedung_tidakada" => $request->gedung === null && 'Yes',
-                    "{$metode}_parkir_tidakada" => $request->parkir === null && 'Yes',
-                    "{$metode}_bangunan_tidakada" => $request->bangunan === null && 'Yes',
-                    "{$metode}_ruangan_tidakada" => $request->ruangan === null && 'Yes',
+                    "{$metode}_gedung_tidakada" => $request->gedung === null ? 'Yes' : 'Off',
+                    "{$metode}_parkir_tidakada" => $request->parkir === null ? 'Yes' : 'Off',
+                    "{$metode}_bangunan_tidakada" => $request->bangunan === null ? 'Yes' : 'Off',
+                    "{$metode}_ruangan_tidakada" => $request->ruangan === null ? 'Yes' : 'Off',
                     "{$metode}_1/2pk_tidakada" => $request->pendingin === null ? 'Yes' : 'Off',
                     "{$metode}_3/4pk_tidakada" => $request->pendingin === null ? 'Yes' : 'Off',
                     "{$metode}_1pk_tidakada" => $request->pendingin === null ? 'Yes' : 'Off',
                     "{$metode}_1,5pk_tidakada" => $request->pendingin === null ? 'Yes' : 'Off',
                     "{$metode}_kipas_tidakada" => $request->pendingin === null ? 'Yes' : 'Off',
-                    "{$metode}_internet_tidakada" => $request->internet === null && 'Yes',
-                    "{$metode}_mejaasesor_tidakada" => $request->mejaasesor === null && 'Yes',
-                    "{$metode}_mejaasesi_tidakada" => $request->mejaasesi === null && 'Yes',
-                    "{$metode}_pc_tidakada" => $request->pc === null && 'Yes',
-                    "{$metode}_kabel_tidakada" => $request->kabel === null && 'Yes',
-                    "{$metode}_komunikasi_tidakada" => $request->komunikasi === null && 'Yes',
-                    "{$metode}_dokumentasi_tidakada" => $request->dokumentasi === null && 'Yes',
-                    "{$metode}_pulpen_tidakada" => $request->pulpen === null && 'Yes',
-                    "{$metode}_pensil_tidakada" => $request->pensil === null && 'Yes',
-                    "{$metode}_tipex_tidakada" => $request->tipex === null && 'Yes',
-                    "{$metode}_penghapus_tidakada" => $request->penghapus === null && 'Yes',
-                    "{$metode}_spidol_tidakada" => $request->spidol === null && 'Yes',
-                    "{$metode}_penggaris_tidakada" => $request->penggaris === null && 'Yes',
-                    "{$metode}_hvs_tidakada" => $request->hvs === null && 'Yes',
-                    "{$metode}_p3k_tidakada" => $request->p3k === null && 'Yes',
-                    "{$metode}_apar_tidakada" => $request->apar === null && 'Yes',
-                    "{$metode}_rambu_tidakada" => $request->rambu === null && 'Yes',
-                    "{$metode}_helm_tidakada" => $request->helm === null && 'Yes',
-                    "{$metode}_sarung_tidakada" => $request->sarung === null && 'Yes',
-                    "{$metode}_sepatu_tidakada" => $request->sepatu === null && 'Yes',
-                    "{$metode}_rompi_tidakada" => $request->rompi === null && 'Yes',
-                    "{$metode}_masker_tidakada" => $request->masker === null && 'Yes',
-                    "{$metode}_telinga_tidakada" => $request->telinga === null && 'Yes',
-                    "{$metode}_harness_tidakada" => $request->harness === null && 'Yes',
-                    "{$metode}_kacamata_tidakada" => $request->kacamata === null && 'Yes',
+                    "{$metode}_internet_tidakada" => $request->internet === null ? 'Yes' : 'Off',
+                    "{$metode}_mejaasesor_tidakada" => $request->mejaasesor === null ? 'Yes' : 'Off',
+                    "{$metode}_mejaasesi_tidakada" => $request->mejaasesi === null ? 'Yes' : 'Off',
+                    "{$metode}_pc_tidakada" => $request->pc === null ? 'Yes' : 'Off',
+                    "{$metode}_kabel_tidakada" => $request->kabel === null ? 'Yes' : 'Off',
+                    "{$metode}_komunikasi_tidakada" => $request->komunikasi === null ? 'Yes' : 'Off',
+                    "{$metode}_dokumentasi_tidakada" => $request->dokumentasi === null ? 'Yes' : 'Off',
+                    "{$metode}_pulpen_tidakada" => $request->pulpen === null ? 'Yes' : 'Off',
+                    "{$metode}_pensil_tidakada" => $request->pensil === null ? 'Yes' : 'Off',
+                    "{$metode}_tipex_tidakada" => $request->tipex === null ? 'Yes' : 'Off',
+                    "{$metode}_penghapus_tidakada" => $request->penghapus === null ? 'Yes' : 'Off',
+                    "{$metode}_spidol_tidakada" => $request->spidol === null ? 'Yes' : 'Off',
+                    "{$metode}_penggaris_tidakada" => $request->penggaris === null ? 'Yes' : 'Off',
+                    "{$metode}_hvs_tidakada" => $request->hvs === null ? 'Yes' : 'Off',
+                    "{$metode}_p3k_tidakada" => $request->p3k === null ? 'Yes' : 'Off',
+                    "{$metode}_apar_tidakada" => $request->apar === null ? 'Yes' : 'Off',
+                    "{$metode}_rambu_tidakada" => $request->rambu === null ? 'Yes' : 'Off',
+                    "{$metode}_helm_tidakada" => $request->helm === null ? 'Yes' : 'Off',
+                    "{$metode}_sarung_tidakada" => $request->sarung === null ? 'Yes' : 'Off',
+                    "{$metode}_sepatu_tidakada" => $request->sepatu === null ? 'Yes' : 'Off',
+                    "{$metode}_rompi_tidakada" => $request->rompi === null ? 'Yes' : 'Off',
+                    "{$metode}_masker_tidakada" => $request->masker === null ? 'Yes' : 'Off',
+                    "{$metode}_telinga_tidakada" => $request->telinga === null ? 'Yes' : 'Off',
+                    "{$metode}_harness_tidakada" => $request->harness === null ? 'Yes' : 'Off',
+                    "{$metode}_kacamata_tidakada" => $request->kacamata === null ? 'Yes' : 'Off',
                     "{$metode}_gedung_sesuai" => $request->gedung,
                     "{$metode}_parkir_sesuai" => $request->parkir,
                     "{$metode}_bangunan_sesuai" => $request->bangunan,
@@ -486,35 +486,35 @@ class FileController extends Controller
                     "{$metode}_telinga_sesuai" => $request->telinga,
                     "{$metode}_harness_sesuai" => $request->harness,
                     "{$metode}_kacamata_sesuai" => $request->kacamata,
-                    "{$metode}_gedung_tidaksesuai" => $request->gedung === null && 'Yes',
-                    "{$metode}_parkir_tidaksesuai" => $request->parkir === null && 'Yes',
-                    "{$metode}_bangunan_tidaksesuai" => $request->bangunan === null && 'Yes',
-                    "{$metode}_ruangan_tidaksesuai" => $request->ruangan === null && 'Yes',
-                    "{$metode}_internet_tidaksesuai" => $request->internet === null && 'Yes',
-                    "{$metode}_mejaasesor_tidaksesuai" => $request->mejaasesor === null && 'Yes',
-                    "{$metode}_mejaasesi_tidaksesuai" => $request->mejaasesi === null && 'Yes',
-                    "{$metode}_pc_tidaksesuai" => $request->pc === null && 'Yes',
-                    "{$metode}_kabel_tidaksesuai" => $request->kabel === null && 'Yes',
-                    "{$metode}_komunikasi_tidaksesuai" => $request->komunikasi === null && 'Yes',
-                    "{$metode}_dokumentasi_tidaksesuai" => $request->dokumentasi === null && 'Yes',
-                    "{$metode}_pulpen_tidaksesuai" => $request->pulpen === null && 'Yes',
-                    "{$metode}_pensil_tidaksesuai" => $request->pensil === null && 'Yes',
-                    "{$metode}_tipex_tidaksesuai" => $request->tipex === null && 'Yes',
-                    "{$metode}_penghapus_tidaksesuai" => $request->penghapus === null && 'Yes',
-                    "{$metode}_spidol_tidaksesuai" => $request->spidol === null && 'Yes',
-                    "{$metode}_penggaris_tidaksesuai" => $request->penggaris === null && 'Yes',
-                    "{$metode}_hvs_tidaksesuai" => $request->hvs === null && 'Yes',
-                    "{$metode}_p3k_tidaksesuai" => $request->p3k === null && 'Yes',
-                    "{$metode}_apar_tidaksesuai" => $request->apar === null && 'Yes',
-                    "{$metode}_rambu_tidaksesuai" => $request->rambu === null && 'Yes',
-                    "{$metode}_helm_tidaksesuai" => $request->helm === null && 'Yes',
-                    "{$metode}_sarung_tidaksesuai" => $request->sarung === null && 'Yes',
-                    "{$metode}_sepatu_tidaksesuai" => $request->sepatu === null && 'Yes',
-                    "{$metode}_rompi_tidaksesuai" => $request->rompi === null && 'Yes',
-                    "{$metode}_masker_tidaksesuai" => $request->masker === null && 'Yes',
-                    "{$metode}_telinga_tidaksesuai" => $request->telinga === null && 'Yes',
-                    "{$metode}_harness_tidaksesuai" => $request->harness === null && 'Yes',
-                    "{$metode}_kacamata_tidaksesuai" => $request->kacamata === null && 'Yes',
+                    "{$metode}_gedung_tidaksesuai" => $request->gedung === null ? 'Yes' : 'Off',
+                    "{$metode}_parkir_tidaksesuai" => $request->parkir === null ? 'Yes' : 'Off',
+                    "{$metode}_bangunan_tidaksesuai" => $request->bangunan === null ? 'Yes' : 'Off',
+                    "{$metode}_ruangan_tidaksesuai" => $request->ruangan === null ? 'Yes' : 'Off',
+                    "{$metode}_internet_tidaksesuai" => $request->internet === null ? 'Yes' : 'Off',
+                    "{$metode}_mejaasesor_tidaksesuai" => $request->mejaasesor === null ? 'Yes' : 'Off',
+                    "{$metode}_mejaasesi_tidaksesuai" => $request->mejaasesi === null ? 'Yes' : 'Off',
+                    "{$metode}_pc_tidaksesuai" => $request->pc === null ? 'Yes' : 'Off',
+                    "{$metode}_kabel_tidaksesuai" => $request->kabel === null ? 'Yes' : 'Off',
+                    "{$metode}_komunikasi_tidaksesuai" => $request->komunikasi === null ? 'Yes' : 'Off',
+                    "{$metode}_dokumentasi_tidaksesuai" => $request->dokumentasi === null ? 'Yes' : 'Off',
+                    "{$metode}_pulpen_tidaksesuai" => $request->pulpen === null ? 'Yes' : 'Off',
+                    "{$metode}_pensil_tidaksesuai" => $request->pensil === null ? 'Yes' : 'Off',
+                    "{$metode}_tipex_tidaksesuai" => $request->tipex === null ? 'Yes' : 'Off',
+                    "{$metode}_penghapus_tidaksesuai" => $request->penghapus === null ? 'Yes' : 'Off',
+                    "{$metode}_spidol_tidaksesuai" => $request->spidol === null ? 'Yes' : 'Off',
+                    "{$metode}_penggaris_tidaksesuai" => $request->penggaris === null ? 'Yes' : 'Off',
+                    "{$metode}_hvs_tidaksesuai" => $request->hvs === null ? 'Yes' : 'Off',
+                    "{$metode}_p3k_tidaksesuai" => $request->p3k === null ? 'Yes' : 'Off',
+                    "{$metode}_apar_tidaksesuai" => $request->apar === null ? 'Yes' : 'Off',
+                    "{$metode}_rambu_tidaksesuai" => $request->rambu === null ? 'Yes' : 'Off',
+                    "{$metode}_helm_tidaksesuai" => $request->helm === null ? 'Yes' : 'Off',
+                    "{$metode}_sarung_tidaksesuai" => $request->sarung === null ? 'Yes' : 'Off',
+                    "{$metode}_sepatu_tidaksesuai" => $request->sepatu === null ? 'Yes' : 'Off',
+                    "{$metode}_rompi_tidaksesuai" => $request->rompi === null ? 'Yes' : 'Off',
+                    "{$metode}_masker_tidaksesuai" => $request->masker === null ? 'Yes' : 'Off',
+                    "{$metode}_telinga_tidaksesuai" => $request->telinga === null ? 'Yes' : 'Off',
+                    "{$metode}_harness_tidaksesuai" => $request->harness === null ? 'Yes' : 'Off',
+                    "{$metode}_kacamata_tidaksesuai" => $request->kacamata === null ? 'Yes' : 'Off',
                     "{$metode}_standarsarana_yes" => $isSesuai,
                     "{$metode}_standarsarana_no" => $isSesuai === "Off" ? "Yes" : "Off",
                     "{$metode}_standaralat_yes" => $isSesuai,
@@ -556,8 +556,8 @@ class FileController extends Controller
 
                 // Initialize FPDI with TCPDF
                 $fpdiSkema = new Fpdi();
-                $fpdiSkema->SetCreator('LSP LPK Gataksindo');
-                $fpdiSkema->SetAuthor('LSP LPK Gataksindo');
+                $fpdiSkema->SetCreator('LSP LPK MIK');
+                $fpdiSkema->SetAuthor('LSP LPK MIK');
                 
                 // Load the existing PDF
                 $pageCount = $fpdiSkema->setSourceFile($tempFpdiSkema);
@@ -861,8 +861,8 @@ class FileController extends Controller
         $fpdi = new Fpdi();
 
         // Set document information (Optional)
-        $fpdi->SetCreator('LSP LPK Gataksindo');
-        $fpdi->SetAuthor('LSP LPK Gataksindo');
+        $fpdi->SetCreator('LSP LPK MIK');
+        $fpdi->SetAuthor('LSP LPK MIK');
         
         // Load the existing PDF
         $pageCount = $fpdi->setSourceFile($tempFpdiPath);
@@ -976,8 +976,8 @@ class FileController extends Controller
 
                 // Initialize FPDI with TCPDF
                 $fpdiSkema = new Fpdi();
-                $fpdiSkema->SetCreator('LSP LPK Gataksindo');
-                $fpdiSkema->SetAuthor('LSP LPK Gataksindo');
+                $fpdiSkema->SetCreator('LSP LPK MIK');
+                $fpdiSkema->SetAuthor('LSP LPK MIK');
                 
                 // Load the existing PDF
                 $pageCount = $fpdiSkema->setSourceFile($tempFpdiSkema);

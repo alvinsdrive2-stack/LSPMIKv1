@@ -85,8 +85,8 @@ class ConfirmController extends Controller
         $fpdi = new Fpdi();
 
         // Set document information (Optional)
-        $fpdi->SetCreator('LSP LPK Gataksindo');
-        $fpdi->SetAuthor('LSP LPK Gataksindo');
+        $fpdi->SetCreator('LSP LPK MIK');
+        $fpdi->SetAuthor('LSP LPK MIK');
         
         // Load the existing PDF
         $pageCount = $fpdi->setSourceFile($tempFpdiPath);
@@ -163,8 +163,8 @@ class ConfirmController extends Controller
         $fpdiPaperless = new Fpdi();
 
         // Set document information (Optional)
-        $fpdiPaperless->SetCreator('LSP LPK Gataksindo');
-        $fpdiPaperless->SetAuthor('LSP LPK Gataksindo');
+        $fpdiPaperless->SetCreator('LSP LPK MIK');
+        $fpdiPaperless->SetAuthor('LSP LPK MIK');
         
         // Load the existing PDF
         $paperlessCount = $fpdiPaperless->setSourceFile($tempPaperlessPath);
@@ -271,8 +271,8 @@ class ConfirmController extends Controller
         $fpdi = new Fpdi();
 
         // Set document information (Optional)
-        $fpdi->SetCreator('LSP LPK Gataksindo');
-        $fpdi->SetAuthor('LSP LPK Gataksindo');
+        $fpdi->SetCreator('LSP LPK MIK');
+        $fpdi->SetAuthor('LSP LPK MIK');
 
         // Load the existing PDF
         $pageCount = $fpdi->setSourceFile($tempFpdiPath);
@@ -292,17 +292,17 @@ class ConfirmController extends Controller
             $fpdi->useTemplate($templateId);
 
             if($i === 1) {
-                $fpdi->write2DBarcode($qrUrl1, 'QRCODE,H', 30, 224, 20, 20);
+                $fpdi->write2DBarcode($qrUrl1, 'QRCODE,H', 30, 203, 20, 20);
             }
             if (($i === 2 && $verification->filetype === '2') || ($i === 2 && $verification->jenis_tuk === 'Mandiri')) {
-                $fpdi->write2DBarcode($qrUrl2, 'QRCODE,H', 30, 240, 20, 20);
+                $fpdi->write2DBarcode($qrUrl2, 'QRCODE,H', 30, 245, 20, 20);
             }
             if ($i === 3 && $verification->filetype === '1') {
-                $fpdi->write2DBarcode($qrUrl1, 'QRCODE,H', 30, 49, 20, 20);
+                $fpdi->write2DBarcode($qrUrl1, 'QRCODE,H', 30, 57, 20, 20);
             }
             if ($i === $signaturePage) {
                 // Use the same QR code for final director signature
-                $fpdi->write2DBarcode($qrUrl1, 'QRCODE,H', 30, 254, 20, 20);
+                $fpdi->write2DBarcode($qrUrl1, 'QRCODE,H', 30, 261, 20, 20);
             }
         }
 
@@ -332,8 +332,8 @@ class ConfirmController extends Controller
         $fpdiPaperless = new Fpdi();
 
         // Set document information (Optional)
-        $fpdiPaperless->SetCreator('LSP LPK Gataksindo');
-        $fpdiPaperless->SetAuthor('LSP LPK Gataksindo');
+        $fpdiPaperless->SetCreator('LSP LPK MIK');
+        $fpdiPaperless->SetAuthor('LSP LPK MIK');
 
         // Load the existing PDF
         $paperlessCount = $fpdiPaperless->setSourceFile($tempPaperlessPath);
@@ -348,13 +348,13 @@ class ConfirmController extends Controller
             $fpdiPaperless->useTemplate($templatePaperless);
 
             if($index === 1) {
-                $fpdiPaperless->write2DBarcode($qrUrlPaperless1, 'QRCODE,H', 30, 224, 20, 20);
+                $fpdiPaperless->write2DBarcode($qrUrlPaperless1, 'QRCODE,H', 30, 203, 20, 20);
             }
             if (($index === 2 && $verification->filetype === '2') || ($index === 2 && $verification->jenis_tuk === 'Mandiri')) {
-                $fpdiPaperless->write2DBarcode($qrUrlPaperless2, 'QRCODE,H', 30, 240, 20, 20);
+                $fpdiPaperless->write2DBarcode($qrUrlPaperless2, 'QRCODE,H', 30, 245, 20, 20);
             }
             if ($index === 3 && $verification->filetype === '1') {
-                $fpdiPaperless->write2DBarcode($qrUrlPaperless1, 'QRCODE,H', 30, 49, 20, 20);
+                $fpdiPaperless->write2DBarcode($qrUrlPaperless1, 'QRCODE,H', 30, 57, 20, 20);
             }
         }
 
