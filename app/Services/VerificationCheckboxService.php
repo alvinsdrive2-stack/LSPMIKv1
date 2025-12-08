@@ -128,7 +128,12 @@ class VerificationCheckboxService
                     $fpdi->SetXY(99, 90);
                     $fpdi->Write(0, $request->pendingin);
                 }
-        }
+            } else {
+                // Draw checkmark at x + 14, y when isChecked is null or false
+                $fpdi->SetFont('dejavusans', '', 12);
+                $fpdi->SetXY($x + 14, $y);
+                $fpdi->Write(0, "✓");
+            }
         }
     }
 
