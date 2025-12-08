@@ -5,6 +5,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content="Sistem Verifikasi TUK - LSP LPK Gataksindo" />
 
+        <!-- Favicon -->
+        <link rel="icon" type="image/png" href="{{ asset('images/logo-banner.png') }}">
+
         <title>@yield('title', 'Verifikasi TUK') - LSP LPK Gataksindo</title>
         @vite('resources/css/app.css')
 

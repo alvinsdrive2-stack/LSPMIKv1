@@ -18,7 +18,13 @@
                 </div>
                 <div class="ml-4">
                     <p class="text-sm font-medium text-gray-500">Total File</p>
-                    <p class="text-2xl font-bold text-gray-900">{{ count($all_files_view) }}</p>
+                    <p class="text-2xl font-bold text-gray-900">
+                        @if(is_array($all_files_view))
+                            {{ count($all_files_view) }}
+                        @else
+                            {{ $all_files_view->count() }}
+                        @endif
+                    </p>
                 </div>
             </div>
         </div>
@@ -34,7 +40,13 @@
                 </div>
                 <div class="ml-4">
                     <p class="text-sm font-medium text-gray-500">Hari Ini</p>
-                    <p class="text-2xl font-bold text-gray-900">{{ $all_files_view->where('created_at', '>=', now()->startOfDay())->count() }}</p>
+                    <p class="text-2xl font-bold text-gray-900">
+                        @if(is_array($all_files_view))
+                            {{ collect($all_files_view)->where('created_at', '>=', now()->startOfDay())->count() }}
+                        @else
+                            {{ $all_files_view->where('created_at', '>=', now()->startOfDay())->count() }}
+                        @endif
+                    </p>
                 </div>
             </div>
         </div>
@@ -50,7 +62,13 @@
                 </div>
                 <div class="ml-4">
                     <p class="text-sm font-medium text-gray-500">Minggu Ini</p>
-                    <p class="text-2xl font-bold text-gray-900">{{ $all_files_view->where('created_at', '>=', now()->startOfWeek())->count() }}</p>
+                    <p class="text-2xl font-bold text-gray-900">
+                        @if(is_array($all_files_view))
+                            {{ collect($all_files_view)->where('created_at', '>=', now()->startOfWeek())->count() }}
+                        @else
+                            {{ $all_files_view->where('created_at', '>=', now()->startOfWeek())->count() }}
+                        @endif
+                    </p>
                 </div>
             </div>
         </div>
@@ -66,7 +84,13 @@
                 </div>
                 <div class="ml-4">
                     <p class="text-sm font-medium text-gray-500">Bulan Ini</p>
-                    <p class="text-2xl font-bold text-gray-900">{{ $all_files_view->where('created_at', '>=', now()->startOfMonth())->count() }}</p>
+                    <p class="text-2xl font-bold text-gray-900">
+                        @if(is_array($all_files_view))
+                            {{ collect($all_files_view)->where('created_at', '>=', now()->startOfMonth())->count() }}
+                        @else
+                            {{ $all_files_view->where('created_at', '>=', now()->startOfMonth())->count() }}
+                        @endif
+                    </p>
                 </div>
             </div>
         </div>
