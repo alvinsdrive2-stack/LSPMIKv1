@@ -1,60 +1,23 @@
-<!DOCTYPE html>
-<html class="dark" lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+@extends('layouts.dashboard-dark')
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    <title>File Verifikasi - LSP LPK Gataksindo</title>
+@section('title', 'Konfirmasi Verifikasi TUK - Ketua TUK')
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+@section('pageTitle', 'Konfirmasi Verifikasi TUK - Ketua TUK')
 
-    <!-- Scripts -->
-    @vite('resources/css/app.css')
-</head>
-<body class="font-sans antialiased dark">
-    <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
-        <header class="bg-white dark:bg-gray-800 shadow">
-            <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 flex justify-between">
-                <a href="/archive" class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-                    Konfirmasi Verifikasi TUK - Ketua TUK
-                </a>
-                <a href="logout" class="py-2 px-1 bg-red-600 rounded text-center font-semibold text-gray-800 dark:text-gray-200 leading-tight">Logout</a>
-            </div>
-        </header>
-        <main>
-            <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-            <link href="https://cdn.datatables.net/v/dt/dt-1.13.4/datatables.min.css" rel="stylesheet" />
-            <script src="https://cdn.datatables.net/v/dt/dt-1.13.4/datatables.min.js"></script>
-            <script>
-                $(document).ready(function() {
-                    $('#listTable').DataTable({
-                        order: [2, 'asc']
-                    });
-
-                    // Add event listener to the select element
-                    $('#status').on('change', function() {
-                        var selectedTuk = $(this).val(); // Get the selected TUK value
-
-                        // Use DataTables' built-in search API to filter the table
-                        $('#listTable').DataTable().column(1).search(selectedTuk).draw();
-                    });
-                });
-            </script>
+@section('content')
 
             @if (session('success'))
-            <div class="max-w-[1200px] text-gray-900 mt-10 mx-auto bg-green-400 p-3 rounded-md">
-                <p>{!! session('success') !!}</p>
+            <div class="max-w-7xl mx-auto mt-6 mb-8">
+                <div class="success-dark px-6 py-4 rounded-xl flex items-center">
+                    <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    <p class="font-medium">{!! session('success') !!}</p>
+                </div>
             </div>
             @endif
-            <div class="py-12 mx-auto lg:max-w-screen-xl">
-                <div class="sm:px-6 lg:px-8">
-                    <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg overflow-x-auto">
-                        <div class="p-6 text-gray-900 dark:text-gray-100">
+
+            <div class="glass-dark rounded-2xl shadow-xl p-6 overflow-x-auto">
                             <table id="listTable">
                                 <thead>
                                     <tr>
@@ -72,12 +35,12 @@
                                             <td>{{ $verification['link'] }}</td>
                                             <td>{{ $verification['created_at'] }}</td>
                                             <td><a href="{{ Storage::disk('public')->url('tuk-paperless/' . \Carbon\Carbon::parse($verification['created_at'])->format('Y-m-d') . '/' . strtoupper($verification['tuk']) . '/' . $verification['link']) }}" target="_blank">
-                                                    <div class="py-2 px-1 bg-green-600 rounded text-center">Lihat File
+                                                    <div class="btn-primary-dark py-2 px-3 rounded text-center inline-block">Lihat File
                                                     </div>
                                                 </a>
                                             </td>
                                             <td><a href="/confirm-tuk/{{ $verification['id'] }}">
-                                                    <div class="py-2 px-1 bg-green-600 rounded text-center">Konfirmasi
+                                                    <div class="btn-primary-dark py-2 px-3 rounded text-center inline-block">Konfirmasi
                                                     </div>
                                                 </a>
                                             </td>
@@ -88,8 +51,31 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </main>
-    </div>
-</body>
-</html>
+                      </div>
+@endsection
+
+@section('scripts')
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <link href="https://cdn.datatables.net/v/dt/dt-1.13.4/datatables.min.css" rel="stylesheet" />
+    <script src="https://cdn.datatables.net/v/dt/dt-1.13.4/datatables.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#listTable').DataTable({
+                order: [[2, 'asc']],
+                language: {
+                    search: "Cari:",
+                    lengthMenu: "Tampilkan _MENU_ data per halaman",
+                    info: "Menampilkan _START_ sampai _END_ dari _TOTAL_ data",
+                    paginate: {
+                        first: "Pertama",
+                        last: "Terakhir",
+                        next: "Selanjutnya",
+                        previous: "Sebelumnya"
+                    },
+                    emptyTable: "Tidak ada data tersedia",
+                    zeroRecords: "Tidak ditemukan data yang cocok"
+                }
+            });
+        });
+    </script>
+@endsection

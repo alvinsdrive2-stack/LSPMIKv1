@@ -266,7 +266,7 @@
         }
 
         .flatpickr-day:hover {
-            background: rgb(31, 58, 115);
+            background: rgb(48, 86, 168);
             color: white;
             border-color: rgb(31, 58, 115);
         }

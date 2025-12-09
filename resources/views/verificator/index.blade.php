@@ -1,4 +1,4 @@
-@extends('layouts.dashboard')
+@extends('layouts.dashboard-dark')
 
 @section('title', 'Verifikasi TUK')
 
@@ -7,7 +7,7 @@
 @section('content')
     <!-- Success Message -->
     @if (session('success'))
-        <div class="glass rounded-xl p-6 mb-8 animate-slideDown">
+        <div class="glass-dark rounded-xl p-6 mb-8 animate-slideDown">
             <div class="flex items-center">
                 <div class="flex-shrink-0">
                     <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -23,7 +23,7 @@
 
     <!-- Statistics Cards -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8 animate-fade-in">
-        <div class="glass rounded-xl p-6 card-hover">
+        <div class="glass-dark rounded-xl p-6 card-hover">
             <div class="flex items-center">
                 <div class="flex-shrink-0">
                     <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center">
@@ -33,13 +33,13 @@
                     </div>
                 </div>
                 <div class="ml-4">
-                    <p class="text-sm font-medium text-gray-500">Total Verifikasi</p>
-                    <p class="text-2xl font-bold text-gray-900">{{ count($all_verifications) }}</p>
+                    <p class="text-sm font-medium text-gray-400">Total Verifikasi</p>
+                    <p class="text-2xl font-bold text-white">{{ count($all_verifications) }}</p>
                 </div>
             </div>
         </div>
 
-        <div class="glass rounded-xl p-6 card-hover">
+        <div class="glass-dark rounded-xl p-6 card-hover">
             <div class="flex items-center">
                 <div class="flex-shrink-0">
                     <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-xl flex items-center justify-center">
@@ -49,13 +49,13 @@
                     </div>
                 </div>
                 <div class="ml-4">
-                    <p class="text-sm font-medium text-gray-500">Hari Ini</p>
-                    <p class="text-2xl font-bold text-gray-900">{{ $all_verifications->where('created_at', '>=', now()->startOfDay())->count() }}</p>
+                    <p class="text-sm font-medium text-gray-400">Hari Ini</p>
+                    <p class="text-2xl font-bold text-white">{{ $all_verifications->where('created_at', '>=', now()->startOfDay())->count() }}</p>
                 </div>
             </div>
         </div>
 
-        <div class="glass rounded-xl p-6 card-hover">
+        <div class="glass-dark rounded-xl p-6 card-hover">
             <div class="flex items-center">
                 <div class="flex-shrink-0">
                     <div class="w-12 h-12 bg-gradient-to-br from-amber-500 to-amber-600 rounded-xl flex items-center justify-center">
@@ -65,13 +65,13 @@
                     </div>
                 </div>
                 <div class="ml-4">
-                    <p class="text-sm font-medium text-gray-500">Minggu Ini</p>
-                    <p class="text-2xl font-bold text-gray-900">{{ $all_verifications->where('created_at', '>=', now()->startOfWeek())->count() }}</p>
+                    <p class="text-sm font-medium text-gray-400">Minggu Ini</p>
+                    <p class="text-2xl font-bold text-white">{{ $all_verifications->where('created_at', '>=', now()->startOfWeek())->count() }}</p>
                 </div>
             </div>
         </div>
 
-        <div class="glass rounded-xl p-6 card-hover">
+        <div class="glass-dark rounded-xl p-6 card-hover">
             <div class="flex items-center">
                 <div class="flex-shrink-0">
                     <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center">
@@ -81,15 +81,15 @@
                     </div>
                 </div>
                 <div class="ml-4">
-                    <p class="text-sm font-medium text-gray-500">Bulan Ini</p>
-                    <p class="text-2xl font-bold text-gray-900">{{ $all_verifications->where('created_at', '>=', now()->startOfMonth())->count() }}</p>
+                    <p class="text-sm font-medium text-gray-400">Bulan Ini</p>
+                    <p class="text-2xl font-bold text-white">{{ $all_verifications->where('created_at', '>=', now()->startOfMonth())->count() }}</p>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Data Table -->
-    <div class="glass rounded-2xl shadow-xl overflow-hidden animate-slide-in">
+    <div class="glass-dark rounded-2xl shadow-xl overflow-hidden animate-slide-in">
         <div class="p-6 bg-gradient-to-r from-[#1F3A73] to-[#3F5FA8]">
             <h3 class="text-xl font-bold text-white flex items-center">
                 <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -103,35 +103,35 @@
             <div class="overflow-x-auto">
                 <table id="listTable" class="w-full">
                     <thead>
-                        <tr class="border-b border-gray-200">
-                            <th class="text-left py-3 px-4 font-semibold text-gray-900">No Surat</th>
-                            <th class="text-left py-3 px-4 font-semibold text-gray-900">Nama File</th>
-                            <th class="text-left py-3 px-4 font-semibold text-gray-900">Tanggal Dibuat</th>
-                            <th class="text-center py-3 px-4 font-semibold text-gray-900">File</th>
-                            <th class="text-center py-3 px-4 font-semibold text-gray-900">Aksi</th>
+                        <tr class="border-b border-gray-700">
+                            <th class="text-left py-3 px-4 font-semibold text-gray-100">No Surat</th>
+                            <th class="text-left py-3 px-4 font-semibold text-gray-100">Nama File</th>
+                            <th class="text-left py-3 px-4 font-semibold text-gray-100">Tanggal Dibuat</th>
+                            <th class="text-center py-3 px-4 font-semibold text-gray-100">File</th>
+                            <th class="text-center py-3 px-4 font-semibold text-gray-100">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
                         @forelse ($all_verifications as $data)
-                            <tr class="border-b border-gray-100 hover:bg-gray-50 transition-colors duration-150">
+                            <tr class="border-b border-gray-700/50 hover:bg-gray-700/20 transition-colors duration-150">
                                 <td class="py-4 px-4">
                                     <div class="flex items-center space-x-2">
-                                        <span class="font-mono text-sm bg-gray-100 px-2 py-1 rounded">{{ $data['no_surat'] }}</span>
+                                        <span class="font-mono text-sm bg-gray-800 px-2 py-1 rounded border border-gray-700">{{ $data['no_surat'] }}</span>
                                     </div>
                                 </td>
                                 <td class="py-4 px-4">
                                     <div class="flex items-center">
-                                        <svg class="w-4 h-4 mr-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <svg class="w-4 h-4 mr-2 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
                                         </svg>
-                                        <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
+                                        <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-900/50 text-blue-300 border border-blue-700/50">
                                             {{ $data['link'] }}
                                         </span>
                                     </div>
                                 </td>
                                 <td class="py-4 px-4">
-                                    <div class="flex items-center text-sm text-gray-700">
-                                        <svg class="w-4 h-4 mr-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <div class="flex items-center text-sm text-gray-300">
+                                        <svg class="w-4 h-4 mr-2 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                                         </svg>
                                         {{ \Carbon\Carbon::parse($data['created_at'])->format('d M Y') }}
@@ -163,10 +163,10 @@
                             <tr>
                                 <td colspan="5" class="py-12 text-center">
                                     <div class="flex flex-col items-center">
-                                        <svg class="w-12 h-12 text-gray-400 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <svg class="w-12 h-12 text-gray-500 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
                                         </svg>
-                                        <p class="text-gray-500 text-sm">Belum ada data verifikasi</p>
+                                        <p class="text-gray-400 text-sm">Belum ada data verifikasi</p>
                                     </div>
                                 </td>
                             </tr>
@@ -179,24 +179,24 @@
 
     <!-- Empty State -->
     @if (count($all_verifications) === 0)
-        <div class="glass rounded-2xl p-12 text-center animate-fade-in">
-            <div class="w-24 h-24 mx-auto mb-6 bg-gray-100 rounded-full flex items-center justify-center">
-                <svg class="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div class="glass-dark rounded-2xl p-12 text-center animate-fade-in">
+            <div class="w-24 h-24 mx-auto mb-6 bg-gray-800 rounded-full flex items-center justify-center border border-gray-700">
+                <svg class="w-12 h-12 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
                 </svg>
             </div>
-            <h3 class="text-xl font-semibold text-gray-900 mb-2">Belum ada data verifikasi</h3>
-            <p class="text-gray-700">Tidak ada file yang perlu diverifikasi saat ini.</p>
+            <h3 class="text-xl font-semibold text-gray-100 mb-2">Belum ada data verifikasi</h3>
+            <p class="text-gray-300">Tidak ada file yang perlu diverifikasi saat ini.</p>
         </div>
     @endif
 
     <!-- PDF Modal -->
-    <div id="pdfModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden">
+    <div id="pdfModal" class="fixed inset-0 bg-black bg-opacity-75 z-50 hidden">
         <div class="flex items-center justify-center min-h-screen p-4">
-            <div class="bg-white rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden">
-                <div class="flex items-center justify-between p-4 border-b">
-                    <h3 class="text-lg font-semibold text-gray-900">Preview Dokumen</h3>
-                    <button onclick="closeModal()" class="p-2 hover:bg-gray-100 rounded-lg transition-colors">
+            <div class="glass-dark rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden">
+                <div class="flex items-center justify-between p-4 border-b border-gray-700">
+                    <h3 class="text-lg font-semibold text-white">Preview Dokumen</h3>
+                    <button onclick="closeModal()" class="p-2 hover:bg-gray-700 rounded-lg transition-colors text-gray-300">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
                         </svg>

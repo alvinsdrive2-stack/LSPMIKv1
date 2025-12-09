@@ -1,4 +1,4 @@
-@extends('layouts.dashboard')
+@extends('layouts.dashboard-dark')
 
 @section('title', 'Penugasan Verifikator TUK Sewaktu')
 
@@ -24,7 +24,7 @@
     <!-- Main Form Section -->
     <div class="w-full">
         <!-- Form Section -->
-        <div class="glass rounded-2xl shadow-xl p-8 animate-fade-in">
+        <div class="glass-dark rounded-2xl shadow-xl p-8 animate-fade-in">
                 <!-- Form Header -->
                 <div class="mb-8 text-center">
                     <div class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-[#1F3A73] to-[#3F5FA8] rounded-2xl mb-4">
@@ -32,16 +32,16 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
                         </svg>
                     </div>
-                    <h2 class="text-2xl font-bold text-gray-900 mb-2">Form Verifikasi TUK</h2>
-                    <p class="text-gray-600">Lengkapi data verifikasi untuk TUK Sewaktu</p>
+                    <h2 class="text-2xl font-bold text-white mb-2">Form Verifikasi TUK</h2>
+                    <p class="text-gray-300">Lengkapi data verifikasi untuk TUK Sewaktu</p>
                 </div>
 
                 <form action="{{ route('createFileSewaktu') }}" method="POST" class="space-y-6 sewaktu-form">
                     @csrf
 
                     <!-- Informasi Utama Section -->
-                    <div class="bg-white rounded-xl p-6 border border-gray-200">
-                        <h3 class="text-lg font-semibold text-[#1F3A73] mb-4 flex items-center">
+                    <div class="card-dark rounded-xl p-6 border border-gray-700">
+                        <h3 class="text-lg font-semibold text-primary-dark mb-4 flex items-center">
                             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
                             </svg>
@@ -50,29 +50,29 @@
 
                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                             <div>
-                                <label for="nomor" class="block text-sm font-medium text-gray-700 mb-2">
+                                <label for="nomor" class="block text-sm font-medium text-gray-300 mb-2">
                                     Nomor Surat
                                 </label>
                                 <input type="number" id="nomor" name="nomor" required
-                                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1F3A73] focus:border-transparent transition-all duration-200 text-gray-900 placeholder-gray-500"
+                                       class="w-full px-4 py-3 form-input-dark rounded-lg transition-all duration-200 placeholder-gray-400"
                                        placeholder="Masukkan nomor surat">
                             </div>
 
                             <div>
-                                <label for="tuk" class="block text-sm font-medium text-gray-700 mb-2">
+                                <label for="tuk" class="block text-sm font-medium text-gray-200 mb-2">
                                     Nama TUK
                                 </label>
                                 <input type="text" id="tuk" name="tuk" required
-                                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1F3A73] focus:border-transparent transition-all duration-200 text-gray-900 placeholder-gray-500"
+                                       class="w-full px-4 py-3 form-input-dark rounded-lg transition-all duration-200 placeholder-gray-400"
                                        placeholder="Masukkan nama TUK">
                             </div>
 
                             <div>
-                                <label for="jenisTUK" class="block text-sm font-medium text-gray-700 mb-2">
+                                <label for="jenisTUK" class="block text-sm font-medium text-gray-200 mb-2">
                                     Jenis TUK
                                 </label>
                                 <select id="jenisTUK" name="jenisTUK" required
-                                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1F3A73] focus:border-transparent transition-all duration-200 text-gray-900">
+                                        class="w-full px-4 py-3 form-select-dark rounded-lg transition-all duration-200">
                                     <option value="">Pilih jenis TUK</option>
                                     <option value="Sewaktu">TUK Sewaktu</option>
                                     <option value="Mandiri">TUK Mandiri</option>
@@ -80,11 +80,11 @@
                             </div>
 
                             <div>
-                                <label for="metodeVerif" class="block text-sm font-medium text-gray-700 mb-2">
+                                <label for="metodeVerif" class="block text-sm font-medium text-gray-200 mb-2">
                                     Metode Verifikasi
                                 </label>
                                 <select id="metodeVerif" name="metodeVerif" required
-                                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1F3A73] focus:border-transparent transition-all duration-200 text-gray-900">
+                                        class="w-full px-4 py-3 form-select-dark rounded-lg transition-all duration-200">
                                     <option value="">Pilih metode verifikasi</option>
                                     <option value="Luring">Luring</option>
                                     <option value="Daring">Daring</option>
@@ -94,8 +94,8 @@
                     </div>
 
                     <!-- Jadwal Section -->
-                    <div class="bg-white rounded-xl p-6 border border-gray-200">
-                        <h3 class="text-lg font-semibold text-gray-800 mb-4 flex items-center">
+                    <div class="card-dark rounded-xl p-6 border border-gray-700">
+                        <h3 class="text-lg font-semibold text-white mb-4 flex items-center">
                             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                             </svg>
@@ -104,15 +104,15 @@
 
                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                             <div>
-                                <label for="tanggal_asesmen" class="block text-sm font-medium text-gray-700 mb-2">
+                                <label for="tanggal_asesmen" class="block text-sm font-medium text-gray-200 mb-2">
                                     Tanggal Asesmen
                                 </label>
                                 <div class="relative">
                                     <input type="text" id="tanggal_asesmen" name="tanggal_asesmen" required
-                                           class="w-full px-4 py-3 pl-12 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1F3A73] focus:border-transparent transition-all duration-200 text-gray-900 cursor-pointer"
+                                           class="w-full px-4 py-3 pl-12 form-input-dark rounded-lg transition-all duration-200 cursor-pointer"
                                            placeholder="Pilih tanggal asesmen" readonly>
                                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                        <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                                         </svg>
                                     </div>
@@ -120,15 +120,15 @@
                             </div>
 
                             <div>
-                                <label for="tanggal_verifikasi" class="block text-sm font-medium text-gray-700 mb-2">
+                                <label for="tanggal_verifikasi" class="block text-sm font-medium text-gray-200 mb-2">
                                     Tanggal Verifikasi
                                 </label>
                                 <div class="relative">
                                     <input type="text" id="tanggal_verifikasi" name="tanggal_verifikasi" required
-                                           class="w-full px-4 py-3 pl-12 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1F3A73] focus:border-transparent transition-all duration-200 text-gray-900 cursor-pointer"
+                                           class="w-full px-4 py-3 pl-12 form-input-dark rounded-lg transition-all duration-200 cursor-pointer"
                                            placeholder="Pilih tanggal verifikasi" readonly>
                                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                        <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                                         </svg>
                                     </div>
@@ -136,28 +136,28 @@
                             </div>
 
                             <div class="lg:col-span-2">
-                                <label for="alamat" class="block text-sm font-medium text-gray-700 mb-2">
+                                <label for="alamat" class="block text-sm font-medium text-gray-200 mb-2">
                                     Alamat
                                 </label>
                                 <input type="text" id="alamat" name="alamat" required
-                                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1F3A73] focus:border-transparent transition-all duration-200 text-gray-900 placeholder-gray-500"
+                                       class="w-full px-4 py-3 form-input-dark rounded-lg transition-all duration-200 placeholder-gray-400"
                                        placeholder="Masukkan alamat lengkap">
                             </div>
 
                             <div>
-                                <label for="peserta" class="block text-sm font-medium text-gray-700 mb-2">
+                                <label for="peserta" class="block text-sm font-medium text-gray-200 mb-2">
                                     Jumlah Peserta
                                 </label>
                                 <input type="number" id="peserta" name="peserta" required
-                                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1F3A73] focus:border-transparent transition-all duration-200 text-gray-900 placeholder-gray-500"
+                                       class="w-full px-4 py-3 form-input-dark rounded-lg transition-all duration-200 placeholder-gray-400"
                                        placeholder="Masukkan jumlah peserta">
                             </div>
                         </div>
                     </div>
 
                     <!-- Personil Section -->
-                    <div class="bg-white rounded-xl p-6 border border-gray-200">
-                        <h3 class="text-lg font-semibold text-gray-800 mb-4 flex items-center">
+                    <div class="card-dark rounded-xl p-6 border border-gray-700">
+                        <h3 class="text-lg font-semibold text-white mb-4 flex items-center">
                             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
                             </svg>
@@ -166,11 +166,11 @@
 
                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                             <div>
-                                <label for="met1" class="block text-sm font-medium text-gray-700 mb-2">
+                                <label for="met1" class="block text-sm font-medium text-gray-200 mb-2">
                                     Validator <span class="text-gray-400 font-normal">(Opsional)</span>
                                 </label>
                                 <input list="asesor" type="text" id="met1" name="met1"
-                                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1F3A73] focus:border-transparent transition-all duration-200 text-gray-900 placeholder-gray-500"
+                                       class="w-full px-4 py-3 form-input-dark rounded-lg transition-all duration-200 placeholder-gray-400"
                                        placeholder="Cari validator...">
                                 <datalist id="asesor">
                                     @foreach ($allAsesor as $asesor)
@@ -180,11 +180,11 @@
                             </div>
 
                             <div>
-                                <label for="ketua" class="block text-sm font-medium text-gray-700 mb-2">
+                                <label for="ketua" class="block text-sm font-medium text-gray-200 mb-2">
                                     Ketua TUK
                                 </label>
                                 <input list="ketua_tuk" type="text" id="ketua" name="ketua_tuk" required
-                                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200 text-gray-900 placeholder-gray-500"
+                                       class="w-full px-4 py-3 border border-gray-700 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200 text-gray-900 placeholder-gray-500"
                                        placeholder="Cari ketua TUK...">
                                 <datalist id="ketua_tuk">
                                     @if($ketuaTukList->count() > 0)
@@ -196,28 +196,28 @@
                             </div>
 
                             <div>
-                                <label for="asesor" class="block text-sm font-medium text-gray-700 mb-2">
+                                <label for="asesor" class="block text-sm font-medium text-gray-200 mb-2">
                                     Verifikator
                                 </label>
                                 <input list="asesor" type="text" id="asesor" name="asesor" required
-                                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200 text-gray-900 placeholder-gray-500"
+                                       class="w-full px-4 py-3 border border-gray-700 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200 text-gray-900 placeholder-gray-500"
                                        placeholder="Cari verifikator...">
                             </div>
 
                             <div>
-                                <label for="admin" class="block text-sm font-medium text-gray-700 mb-2">
+                                <label for="admin" class="block text-sm font-medium text-gray-200 mb-2">
                                     Admin TUK
                                 </label>
                                 <input type="text" id="admin" name="admin" required
-                                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200 text-gray-900 placeholder-gray-500"
+                                       class="w-full px-4 py-3 border border-gray-700 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200 text-gray-900 placeholder-gray-500"
                                        placeholder="Masukkan nama admin TUK">
                             </div>
                         </div>
                     </div>
 
                     <!-- Skema Section -->
-                    <div class="bg-white rounded-xl p-6 border border-gray-200">
-                        <h3 class="text-lg font-semibold text-gray-800 mb-4 flex items-center">
+                    <div class="card-dark rounded-xl p-6 border border-gray-700">
+                        <h3 class="text-lg font-semibold text-white mb-4 flex items-center">
                             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
                             </svg>
@@ -226,15 +226,15 @@
 
                         <div id="skemaContainer" class="space-y-4">
                             <!-- First Skema Group -->
-                            <div class="skema-group bg-white rounded-lg p-4 border border-gray-300">
-                                <h4 class="font-medium text-gray-900 mb-3">Skema #1</h4>
+                            <div class="skema-group bg-white rounded-lg p-4 border border-gray-700">
+                                <h4 class="font-medium text-gray-200 mb-3">Skema #1</h4>
                                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                                     <div>
-                                        <label for="skema1" class="block text-sm font-medium text-gray-700 mb-2">
+                                        <label for="skema1" class="block text-sm font-medium text-gray-200 mb-2">
                                             Skema Sertifikasi
                                         </label>
                                         <input list="jabker" type="text" id="skema1" name="skema[]" required
-                                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all duration-200 text-sm text-gray-900 placeholder-gray-500"
+                                               class="w-full px-3 py-2 border border-gray-700 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all duration-200 text-sm text-gray-900 placeholder-gray-500"
                                                placeholder="Pilih skema">
                                         <datalist id="jabker">
                                             @foreach ($allJabker as $jabker)
@@ -244,20 +244,20 @@
                                     </div>
 
                                     <div>
-                                        <label for="jenjang1" class="block text-sm font-medium text-gray-700 mb-2">
+                                        <label for="jenjang1" class="block text-sm font-medium text-gray-200 mb-2">
                                             Jenjang
                                         </label>
                                         <input type="number" id="jenjang1" name="jenjang[]" required
-                                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all duration-200 text-sm text-gray-900 placeholder-gray-500"
+                                               class="w-full px-3 py-2 border border-gray-700 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all duration-200 text-sm text-gray-900 placeholder-gray-500"
                                                placeholder="Masukkan jenjang">
                                     </div>
 
                                     <div>
-                                        <label for="metode1" class="block text-sm font-medium text-gray-700 mb-2">
+                                        <label for="metode1" class="block text-sm font-medium text-gray-200 mb-2">
                                             Metode Asesmen
                                         </label>
                                         <select id="metode1" name="metode[]" required
-                                                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all duration-200 text-sm text-gray-900 placeholder-gray-500">
+                                                class="w-full px-3 py-2 border border-gray-700 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all duration-200 text-sm text-gray-900 placeholder-gray-500">
                                             <option value="">Pilih metode</option>
                                             <option value="Observasi">Observasi</option>
                                             <option value="Portofolio">Portofolio</option>
@@ -280,7 +280,7 @@
                     <!-- Submit Button -->
                     <div class="flex justify-center">
                         <button type="submit"
-                                class="flex items-center space-x-3 px-8 py-3 bg-gradient-to-r from-[#1F3A73] to-[#3F5FA8] hover:from-[#3F5FA8] hover:to-[#1F3A73] text-white font-semibold rounded-lg transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl">
+                                class="btn-primary-dark flex items-center space-x-3 px-8 py-3 font-semibold rounded-lg shadow-lg hover:shadow-xl">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
                             </svg>
@@ -292,12 +292,12 @@
         </div>
 
     <!-- PDF Modal -->
-    <div id="pdfModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden">
+    <div id="pdfModal" class="fixed inset-0 bg-black bg-opacity-75 z-50 hidden">
         <div class="flex items-center justify-center min-h-screen p-4">
-            <div class="bg-white rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden">
-                <div class="flex items-center justify-between p-4 border-b">
-                    <h3 class="text-lg font-semibold text-gray-900">Preview Dokumen</h3>
-                    <button onclick="closeModal()" class="p-2 hover:bg-gray-100 rounded-lg transition-colors">
+            <div class="glass-dark rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden">
+                <div class="flex items-center justify-between p-4 border-b border-gray-700">
+                    <h3 class="text-lg font-semibold text-white">Preview Dokumen</h3>
+                    <button onclick="closeModal()" class="p-2 hover:bg-gray-700 rounded-lg transition-colors text-gray-300">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
                         </svg>
@@ -316,111 +316,49 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 
     <style>
-        /* Force input text to always be black in /sewaktu - Override everything! */
-        .sewaktu-form input,
-        .sewaktu-form select,
-        .sewaktu-form textarea {
-            color: #000000 !important;
-            background-color: #ffffff !important;
+        /* Dark mode form overrides */
+        .sewaktu-form input::placeholder {
+            color: rgba(255, 255, 255, 0.5) !important;
         }
 
-        .sewaktu-form input[type="text"],
-        .sewaktu-form input[type="number"],
-        .sewaktu-form input[type="date"],
-        .sewaktu-form input[type="email"],
-        .sewaktu-form select,
-        .sewaktu-form textarea {
-            color: #000000 !important;
-            background-color: #ffffff !important;
+        .flatpickr-calendar {
+            background: #1F3A73 !important;
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
         }
 
-        .sewaktu-form input[type="text"]:focus,
-        .sewaktu-form input[type="number"]:focus,
-        .sewaktu-form input[type="date"]:focus,
-        .sewaktu-form input[type="email"]:focus,
-        .sewaktu-form select:focus,
-        .sewaktu-form textarea:focus {
-            color: #000000 !important;
-            background-color: #ffffff !important;
+        .flatpickr-day {
+            color: #e5e7eb !important;
         }
 
-        .sewaktu-form input[type="text"]:hover,
-        .sewaktu-form input[type="number"]:hover,
-        .sewaktu-form input[type="date"]:hover,
-        .sewaktu-form input[type="email"]:hover,
-        .sewaktu-form select:hover,
-        .sewaktu-form textarea:hover {
-            color: #000000 !important;
-            background-color: #ffffff !important;
+        .flatpickr-day.selected {
+            background: #3F5FA8 !important;
+            border-color: #3F5FA8 !important;
         }
 
-        .sewaktu-form input:not([type="checkbox"]):not([type="radio"]):not([type="file"]),
-        .sewaktu-form input:not([type="checkbox"]):not([type="radio"]):not([type="file"]):focus,
-        .sewaktu-form input:not([type="checkbox"]):not([type="radio"]):not([type="file"]):hover {
-            color: #000000 !important;
-            background-color: #ffffff !important;
-        }
-
-        .sewaktu-form input::placeholder,
-        .sewaktu-form textarea::placeholder {
-            color: #9ca3af !important;
-        }
-
+  
         .sewaktu-form select option {
             color: #000000 !important;
             background-color: #ffffff !important;
         }
 
-        /* Override any custom-input class */
-        .sewaktu-form .custom-input {
-            color: #000000 !important;
-            background-color: #ffffff !important;
+        /* Remove any remaining forced white backgrounds */
+        .sewaktu-form * {
+            background-color: initial !important;
         }
 
-        .sewaktu-form .custom-input:focus {
-            color: #000000 !important;
-            background-color: #ffffff !important;
-        }
-
-        /* Super specific override - highest specificity */
-        .sewaktu-form div input[type="text"],
-        .sewaktu-form div input[type="number"],
-        .sewaktu-form div input[type="email"],
-        .sewaktu-form div input[type="date"],
-        .sewaktu-form div select {
-            color: #000000 !important;
-            background-color: #ffffff !important;
-        }
-
-        .sewaktu-form div input[type="text"]:focus,
-        .sewaktu-form div input[type="number"]:focus,
-        .sewaktu-form div input[type="email"]:focus,
-        .sewaktu-form div input[type="date"]:focus,
-        .sewaktu-form div select:focus {
-            color: #000000 !important;
-            background-color: #ffffff !important;
-        }
-
-        /* Override global CSS with inline-style level specificity */
         .sewaktu-form input,
-        .sewaktu-form input *,
         .sewaktu-form select,
-        .sewaktu-form select * {
-            color: #000000 !important;
+        .sewaktu-form textarea {
+            background-color: transparent !important;
         }
 
-        .sewaktu-form input:focus,
-        .sewaktu-form input:focus *,
-        .sewaktu-form select:focus,
-        .sewaktu-form select:focus * {
-            color: #000000 !important;
-        }
-
-        /* Custom Flatpickr styling to match theme */
+        
+        /* Custom Flatpickr styling to match dark theme */
         .flatpickr-calendar {
             border-radius: 12px;
-            box-shadow: 0 20px 25px -5px rgba(31, 58, 115, 0.1), 0 10px 10px -5px rgba(31, 58, 115, 0.04);
-            border: 1px solid #e5e7eb;
+            box-shadow: 0 20px 25px -5px rgba(31, 58, 115, 0.3), 0 10px 10px -5px rgba(31, 58, 115, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: #1F3A73;
         }
 
         .flatpickr-months {
@@ -478,13 +416,13 @@
         }
 
         .flatpickr-day:hover {
-            background: rgb(31, 58, 115);
+            background: rgb(116, 155, 240);
             color: white;
-            border-color: rgb(31, 58, 115);
+            border-color: rgb(255, 255, 255);
         }
 
         .flatpickr-day.selected {
-            background: rgb(31, 58, 115);
+            background: rgb(56, 91, 166);
             color: white;
             border-color: rgb(31, 58, 115);
         }
@@ -521,7 +459,7 @@
             const container = document.getElementById('skemaContainer');
 
             const newField = document.createElement('div');
-            newField.className = 'skema-group bg-white rounded-lg p-4 border border-gray-300 animate-fade-in';
+            newField.className = 'skema-group bg-white rounded-lg p-4 border border-gray-700 animate-fade-in';
             newField.innerHTML = `
                 <div class="flex items-center justify-between mb-3">
                     <h4 class="font-medium text-gray-900">Skema #${skemaCount}</h4>
@@ -533,27 +471,27 @@
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     <div>
-                        <label for="skema${skemaCount}" class="block text-sm font-medium text-gray-700 mb-2">
+                        <label for="skema${skemaCount}" class="block text-sm font-medium text-gray-200 mb-2">
                             Skema Sertifikasi
                         </label>
                         <input list="jabker" type="text" id="skema${skemaCount}" name="skema[]" required
-                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all duration-200 text-sm text-gray-900 placeholder-gray-500"
+                               class="w-full px-3 py-2 border border-gray-700 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all duration-200 text-sm text-gray-900 placeholder-gray-500"
                                placeholder="Pilih skema">
                     </div>
                     <div>
-                        <label for="jenjang${skemaCount}" class="block text-sm font-medium text-gray-700 mb-2">
+                        <label for="jenjang${skemaCount}" class="block text-sm font-medium text-gray-200 mb-2">
                             Jenjang
                         </label>
                         <input type="number" id="jenjang${skemaCount}" name="jenjang[]" required
-                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all duration-200 text-sm text-gray-900 placeholder-gray-500"
+                               class="w-full px-3 py-2 border border-gray-700 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all duration-200 text-sm text-gray-900 placeholder-gray-500"
                                placeholder="Masukkan jenjang">
                     </div>
                     <div>
-                        <label for="metode${skemaCount}" class="block text-sm font-medium text-gray-700 mb-2">
+                        <label for="metode${skemaCount}" class="block text-sm font-medium text-gray-200 mb-2">
                             Metode Asesmen
                         </label>
                         <select id="metode${skemaCount}" name="metode[]" required
-                                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all duration-200 text-sm text-gray-900 placeholder-gray-500">
+                                class="w-full px-3 py-2 border border-gray-700 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all duration-200 text-sm text-gray-900 placeholder-gray-500">
                             <option value="">Pilih metode</option>
                             <option value="Observasi">Observasi</option>
                             <option value="Portofolio">Portofolio</option>

@@ -1553,7 +1553,7 @@ class FileController extends Controller
             : '/home/lspgatensi/new-balai/veriftuk';
         
         // ubah pdftk pathnya sesuai dengan lokasi download jika pakai windows dan local
-        $pdftkPath = '/snap/bin/pdftk';
+        $pdftkPath = 'C:/Program Files (x86)/PDFtk Server/bin/pdftk.exe';
 
         if($request->jenisTUK === 'Mandiri') {
             $template = "{$basePath}/app/Http/Controllers/template-mandiri.pdf";

@@ -4,7 +4,8 @@
       "Bash(copy:*)",
       "Bash(php artisan migrate:*)",
       "Bash(php artisan make:middleware:*)",
-      "Bash(php artisan make:controller:*)"
+      "Bash(php artisan make:controller:*)",
+      "Bash(findstr:*)"
     ],
     "deny": [],
     "ask": []

@@ -1,4 +1,4 @@
-@extends('layouts.dashboard')
+@extends('layouts.dashboard-dark')
 
 @section('title', 'Konfirmasi Verifikasi TUK')
 
@@ -7,13 +7,13 @@
 @section('content')
     <!-- Statistics Overview -->
     <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-        <div class="glass rounded-xl p-6 card-hover animate-fade-in">
+        <div class="glass-dark rounded-xl p-6 card-hover animate-fade-in">
             <div class="flex items-center justify-between">
                 <div>
-                    <p class="text-sm font-medium text-gray-700">Menunggu Konfirmasi</p>
+                    <p class="text-sm font-medium text-gray-300">Menunggu Konfirmasi</p>
                     <p class="text-2xl font-bold text-amber-600">{{ count($all_verifications) }}</p>
                 </div>
-                <div class="p-3 bg-amber-100 rounded-lg">
+                <div class="p-3 bg-amber-900/30 rounded-lg border border-amber-700/30">
                     <svg class="w-6 h-6 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
                     </svg>
@@ -21,13 +21,13 @@
             </div>
         </div>
 
-        <div class="glass rounded-xl p-6 card-hover animate-fade-in" style="animation-delay: 0.1s;">
+        <div class="glass-dark rounded-xl p-6 card-hover animate-fade-in" style="animation-delay: 0.1s;">
             <div class="flex items-center justify-between">
                 <div>
-                    <p class="text-sm font-medium text-gray-700">Menunggu SK</p>
+                    <p class="text-sm font-medium text-gray-300">Menunggu SK</p>
                     <p class="text-2xl font-bold text-blue-600">{{ count($all_sk) }}</p>
                 </div>
-                <div class="p-3 bg-blue-100 rounded-lg">
+                <div class="p-3 bg-blue-900/30 rounded-lg border border-blue-700/30">
                     <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
                     </svg>
@@ -35,13 +35,13 @@
             </div>
         </div>
 
-        <div class="glass rounded-xl p-6 card-hover animate-fade-in" style="animation-delay: 0.2s;">
+        <div class="glass-dark rounded-xl p-6 card-hover animate-fade-in" style="animation-delay: 0.2s;">
             <div class="flex items-center justify-between">
                 <div>
-                    <p class="text-sm font-medium text-gray-700">Total Proses</p>
-                    <p class="text-2xl font-bold text-gray-900">{{ count($all_verifications) + count($all_sk) }}</p>
+                    <p class="text-sm font-medium text-gray-300">Total Proses</p>
+                    <p class="text-2xl font-bold text-white">{{ count($all_verifications) + count($all_sk) }}</p>
                 </div>
-                <div class="p-3 bg-purple-100 rounded-lg">
+                <div class="p-3 bg-purple-900/30 rounded-lg border border-purple-700/30">
                     <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/>
                     </svg>
@@ -49,17 +49,17 @@
             </div>
         </div>
 
-        <div class="glass rounded-xl p-6 card-hover animate-fade-in" style="animation-delay: 0.3s;">
+        <div class="glass-dark rounded-xl p-6 card-hover animate-fade-in" style="animation-delay: 0.3s;">
             <div class="flex items-center justify-between">
                 <div>
-                    <p class="text-sm font-medium text-gray-700">Hari Ini</p>
+                    <p class="text-sm font-medium text-gray-300">Hari Ini</p>
                     <p class="text-2xl font-bold text-green-600">
                         {{ collect($all_verifications)->merge($all_sk)->filter(function($item) {
                             return \Carbon\Carbon::parse($item['created_at'])->isToday();
                         })->count() }}
                     </p>
                 </div>
-                <div class="p-3 bg-green-100 rounded-lg">
+                <div class="p-3 bg-green-900/30 rounded-lg border border-green-700/30">
                     <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
                     </svg>
@@ -69,8 +69,8 @@
     </div>
 
     <!-- Verifications Table -->
-    <div class="glass rounded-2xl shadow-xl overflow-hidden mb-8 animate-slide-in">
-        <div class="p-6 bg-gradient-to-r from-amber-500 to-orange-600">
+    <div class="glass-dark rounded-2xl shadow-xl overflow-hidden mb-8 animate-slide-in">
+        <div class="p-6 bg-gradient-to-r from-blue-900 to-blue-500">
             <h3 class="text-xl font-bold text-white flex items-center">
                 <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
@@ -84,30 +84,30 @@
                 <div class="overflow-x-auto">
                     <table id="listTable" class="w-full">
                         <thead>
-                            <tr class="border-b border-gray-200">
-                                <th class="text-left py-3 px-4 font-semibold text-gray-900">No Surat</th>
-                                <th class="text-left py-3 px-4 font-semibold text-gray-900">Nama File</th>
-                                <th class="text-left py-3 px-4 font-semibold text-gray-900">Tanggal</th>
-                                <th class="text-center py-3 px-4 font-semibold text-gray-900">File</th>
-                                <th class="text-center py-3 px-4 font-semibold text-gray-900">Aksi</th>
+                            <tr class="border-b border-gray-700">
+                                <th class="text-left py-3 px-4 font-semibold text-gray-100">No Surat</th>
+                                <th class="text-left py-3 px-4 font-semibold text-gray-100">Nama File</th>
+                                <th class="text-left py-3 px-4 font-semibold text-gray-100">Tanggal</th>
+                                <th class="text-center py-3 px-4 font-semibold text-gray-100">File</th>
+                                <th class="text-center py-3 px-4 font-semibold text-gray-100">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($all_verifications as $verification)
-                                <tr class="border-b border-gray-100 hover:bg-amber-50 transition-colors duration-150">
+                                <tr class="border-b border-gray-700/50 hover:bg-amber-900/20 transition-colors duration-150">
                                     <td class="py-4 px-4">
-                                        <span class="font-mono text-sm bg-gray-100 px-2 py-1 rounded">{{ $verification['no_surat'] }}</span>
+                                        <span class="font-mono text-sm bg-gray-800 px-2 py-1 rounded border border-gray-700">{{ $verification['no_surat'] }}</span>
                                     </td>
                                     <td class="py-4 px-4">
                                         <div class="flex items-center space-x-2">
-                                            <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
                                             </svg>
-                                            <span class="font-medium text-gray-900">{{ $verification['link'] }}</span>
+                                            <span class="font-medium text-gray-100">{{ $verification['link'] }}</span>
                                         </div>
                                     </td>
                                     <td class="py-4 px-4">
-                                        <div class="text-sm text-gray-700">
+                                        <div class="text-sm text-gray-300">
                                             {{ \Carbon\Carbon::parse($verification['created_at'])->format('d M Y H:i') }}
                                         </div>
                                     </td>
@@ -124,7 +124,7 @@
                                     </td>
                                     <td class="py-4 px-4 text-center">
                                         <a href="/confirm/{{ $verification['id'] }}"
-                                           class="inline-flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-white font-medium rounded-lg transition-all duration-200 transform hover:scale-105 shadow-md hover:shadow-lg">
+                                           class="inline-flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-teal-500 to-cyan-600 hover:from-teal-600 hover:to-cyan-700 text-white font-medium rounded-lg transition-all duration-200 transform hover:scale-105 shadow-md hover:shadow-lg">
                                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
                                             </svg>
@@ -138,20 +138,20 @@
                 </div>
             @else
                 <div class="text-center py-12">
-                    <div class="w-16 h-16 mx-auto mb-4 bg-amber-100 rounded-full flex items-center justify-center">
+                    <div class="w-16 h-16 mx-auto mb-4 bg-amber-900/30 rounded-full flex items-center justify-center border border-amber-700/30">
                         <svg class="w-8 h-8 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
                         </svg>
                     </div>
-                    <h4 class="text-lg font-semibold text-gray-900 mb-2">Tidak Ada Verifikasi Menunggu</h4>
-                    <p class="text-gray-700">Semua verifikasi telah dikonfirmasi.</p>
+                    <h4 class="text-lg font-semibold text-gray-100 mb-2">Tidak Ada Verifikasi Menunggu</h4>
+                    <p class="text-gray-300">Semua verifikasi telah dikonfirmasi.</p>
                 </div>
             @endif
         </div>
     </div>
 
     <!-- SK Table -->
-    <div class="glass rounded-2xl shadow-xl overflow-hidden animate-slide-in" style="animation-delay: 0.2s;">
+    <div class="glass-dark rounded-2xl shadow-xl overflow-hidden animate-slide-in" style="animation-delay: 0.2s;">
         <div class="p-6 bg-gradient-to-r from-blue-500 to-blue-600">
             <h3 class="text-xl font-bold text-white flex items-center">
                 <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -166,30 +166,30 @@
                 <div class="overflow-x-auto">
                     <table class="w-full">
                         <thead>
-                            <tr class="border-b border-gray-200">
-                                <th class="text-left py-3 px-4 font-semibold text-gray-900">No Surat</th>
-                                <th class="text-left py-3 px-4 font-semibold text-gray-900">Nama File</th>
-                                <th class="text-left py-3 px-4 font-semibold text-gray-900">Tanggal</th>
-                                <th class="text-center py-3 px-4 font-semibold text-gray-900">File</th>
-                                <th class="text-center py-3 px-4 font-semibold text-gray-900">Aksi</th>
+                            <tr class="border-b border-gray-700">
+                                <th class="text-left py-3 px-4 font-semibold text-gray-100">No Surat</th>
+                                <th class="text-left py-3 px-4 font-semibold text-gray-100">Nama File</th>
+                                <th class="text-left py-3 px-4 font-semibold text-gray-100">Tanggal</th>
+                                <th class="text-center py-3 px-4 font-semibold text-gray-100">File</th>
+                                <th class="text-center py-3 px-4 font-semibold text-gray-100">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($all_sk as $sk)
-                                <tr class="border-b border-gray-100 hover:bg-blue-50 transition-colors duration-150">
+                                <tr class="border-b border-gray-700/50 hover:bg-blue-900/20 transition-colors duration-150">
                                     <td class="py-4 px-4">
-                                        <span class="font-mono text-sm bg-gray-100 px-2 py-1 rounded text-gray-900">{{ $sk['no_surat'] }}</span>
+                                        <span class="font-mono text-sm bg-gray-800 px-2 py-1 rounded text-gray-100 border border-gray-700">{{ $sk['no_surat'] }}</span>
                                     </td>
                                     <td class="py-4 px-4">
                                         <div class="flex items-center space-x-2">
-                                            <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
                                             </svg>
-                                            <span class="font-medium text-gray-900">{{ $sk['link'] }}</span>
+                                            <span class="font-medium text-gray-100">{{ $sk['link'] }}</span>
                                         </div>
                                     </td>
                                     <td class="py-4 px-4">
-                                        <div class="text-sm text-gray-700">
+                                        <div class="text-sm text-gray-300">
                                             {{ \Carbon\Carbon::parse($sk['created_at'])->format('d M Y H:i') }}
                                         </div>
                                     </td>
@@ -220,13 +220,13 @@
                 </div>
             @else
                 <div class="text-center py-12">
-                    <div class="w-16 h-16 mx-auto mb-4 bg-blue-100 rounded-full flex items-center justify-center">
+                    <div class="w-16 h-16 mx-auto mb-4 bg-blue-900/30 rounded-full flex items-center justify-center border border-blue-700/30">
                         <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
                         </svg>
                     </div>
-                    <h4 class="text-lg font-semibold text-gray-900 mb-2">Tidak Ada SK Menunggu</h4>
-                    <p class="text-gray-700">Tidak ada SK yang perlu dibuat saat ini.</p>
+                    <h4 class="text-lg font-semibold text-gray-100 mb-2">Tidak Ada SK Menunggu</h4>
+                    <p class="text-gray-300">Tidak ada SK yang perlu dibuat saat ini.</p>
                 </div>
             @endif
         </div>

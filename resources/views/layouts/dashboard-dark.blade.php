@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <style>
-        /* Page Transition Styles */
+        /* Dark Mode Page Transition Styles */
         .page-transition-enter {
             opacity: 0;
             transform: translateY(20px);
@@ -44,7 +44,7 @@
             transition: opacity 0.3s ease, transform 0.3s ease;
         }
 
-        /* Loading Overlay */
+        /* Loading Overlay - Dark */
         #page-loader {
             position: fixed;
             top: 0;
@@ -96,82 +96,196 @@
             50% { transform: scale(1.1); opacity: 0.8; }
         }
 
-        /* Smooth scroll behavior */
+        /* Dark Mode Styles */
         html {
             scroll-behavior: smooth;
         }
 
-        /* Link transitions */
-        .smooth-link {
-            position: relative;
+        body {
+            background: linear-gradient(135deg, #0F1A36 0%, #1F3A73 50%, #0F1A36 100%);
+            min-height: 100vh;
+            color: #e5e7eb;
+        }
+
+        /* Glass effect for dark mode */
+        .glass-dark {
+            background: rgba(15, 26, 54, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Header styling */
+        .header-dark {
+            background: rgba(15, 26, 54, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Navigation links */
+        .nav-link-dark {
+            color: #d1d5db;
             transition: all 0.3s ease;
         }
 
-        .smooth-link::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -2px;
-            left: 50%;
-            background-color: currentColor;
+        .nav-link-dark:hover {
+            color: #60a5fa;
+        }
+
+        /* Form styling */
+        .form-input-dark {
+            background: rgba(31, 58, 115, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #e5e7eb;
             transition: all 0.3s ease;
         }
 
-        .smooth-link:hover::after {
-            width: 100%;
-            left: 0;
+        .form-input-dark:focus {
+            background: rgba(31, 58, 115, 0.5);
+            border-color: #3F5FA8;
+            color: white;
+            box-shadow: 0 0 0 3px rgba(63, 95, 168, 0.2);
         }
 
-        /* Fade in animation for content */
-        .fade-in {
-            animation: fadeIn 0.8s ease forwards;
+        /* Button styling */
+        .btn-primary-dark {
+            background: linear-gradient(135deg, #1F3A73 0%, #3F5FA8 100%);
+            color: white;
+            transition: all 0.3s ease;
         }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .btn-primary-dark:hover {
+            background: linear-gradient(135deg, #2a4a8a 0%, #4a6fb8 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(31, 58, 115, 0.3);
         }
 
-        /* Custom scrollbar styling */
-        ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
+        /* Table styling for dark mode */
+        .dataTables_wrapper {
+            background: rgba(15, 26, 54, 0.5);
+            border-radius: 8px;
+            padding: 20px;
         }
 
-        ::-webkit-scrollbar-track {
-            background: #f1f1f1;
+        table.dataTable {
+            color: #e5e7eb;
         }
 
-        ::-webkit-scrollbar-thumb {
-            background: #1F3A73;
+        table.dataTable thead th {
+            background: rgba(31, 58, 115, 0.5);
+            color: white;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        table.dataTable tbody tr {
+            background: rgba(31, 58, 115, 0.1);
+        }
+
+        table.dataTable tbody tr:nth-child(even) {
+            background: rgba(31, 58, 115, 0.05);
+        }
+
+        table.dataTable tbody tr:hover {
+            background: rgba(31, 58, 115, 0.2);
+        }
+
+        /* DataTables pagination dark mode */
+        .dataTables_wrapper .dataTables_paginate .paginate_button {
+            color: #60a5fa !important;
+            background: rgba(31, 58, 115, 0.3) !important;
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+        }
+
+        .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+            background: rgba(31, 58, 115, 0.5) !important;
+            color: white !important;
+        }
+
+        .dataTables_wrapper .dataTables_paginate .paginate_button.current {
+            background: linear-gradient(135deg, #1F3A73 0%, #3F5FA8 100%) !important;
+            color: white !important;
+        }
+
+        /* Search input dark mode */
+        .dataTables_wrapper .dataTables_filter input {
+            background: rgba(31, 58, 115, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #e5e7eb;
             border-radius: 4px;
+            padding: 8px 12px;
         }
 
-        ::-webkit-scrollbar-thumb:hover {
-            background: #3F5FA8;
+        .dataTables_wrapper .dataTables_filter input:focus {
+            background: rgba(31, 58, 115, 0.5);
+            border-color: #3F5FA8;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(63, 95, 168, 0.2);
         }
 
-        /* Selection color */
-        ::selection {
-            background-color: #1F3A73;
+        /* Success message dark mode */
+        .success-dark {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(5, 150, 105, 0.1) 100%);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: #10b981;
+        }
+
+        /* Card styling */
+        .card-dark {
+            background: rgba(31, 58, 115, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .card-dark:hover {
+            background: rgba(31, 58, 115, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(31, 58, 115, 0.2);
+        }
+
+        /* Select dropdown dark mode */
+        .form-select-dark {
+            background: rgba(31, 58, 115, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #e5e7eb;
+            transition: all 0.3s ease;
+        }
+
+        .form-select-dark:focus {
+            background: rgba(31, 58, 115, 0.5);
+            border-color: #3F5FA8;
             color: white;
+            box-shadow: 0 0 0 3px rgba(63, 95, 168, 0.2);
         }
 
-        ::-moz-selection {
-            background-color: #1F3A73;
-            color: white;
+        /* Footer dark mode */
+        .footer-dark {
+            background: rgba(15, 26, 54, 0.95);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Text color utilities */
+        .text-primary-dark {
+            color: #60a5fa;
+        }
+
+        .text-muted-dark {
+            color: #9ca3af;
+        }
+
+        /* Badge dark mode */
+        .badge-dark {
+            background: rgba(31, 58, 115, 0.5);
+            color: #e5e7eb;
+            padding: 4px 12px;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 500;
         }
     </style>
 </head>
 
-<body class="font-sans antialiased bg-gradient-to-br from-gray-50 to-gray-100 min-h-screen">
+<body class="font-sans antialiased">
     <!-- Page Loader -->
     <div id="page-loader">
         <div class="loader-content">
@@ -189,7 +303,7 @@
     </div>
 
     <!-- Navigation Header -->
-    <header class="bg-white/80 backdrop-blur-lg border-b border-gray-200/50 sticky top-0 z-50 shadow-sm">
+    <header class="header-dark sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center py-4">
                 <div class="flex items-center space-x-4">
@@ -197,8 +311,8 @@
                     <div class="flex items-center">
                         <img src="/images/logo-banner.png" alt="LSP LPK Gataksindo" class="w-10 h-10 object-contain">
                         <div class="ml-3">
-                            <h1 class="text-xl font-bold text-[#1F3A73]">{{ $pageTitle ?? 'Dashboard' }}</h1>
-                            <p class="text-xs text-gray-700">Lembaga Sertifikasi Profesi LPK Gataksindo</p>
+                            <h1 class="text-xl font-bold text-white">{{ $pageTitle ?? 'Dashboard' }}</h1>
+                            <p class="text-xs text-gray-300">Lembaga Sertifikasi Profesi LPK Gataksindo</p>
                         </div>
                     </div>
                 </div>
@@ -206,61 +320,68 @@
                 <div class="flex items-center space-x-4">
                     <!-- Navigation -->
                     <nav class="hidden md:flex space-x-6">
-                        <a href="/archive" class="text-gray-800 hover:text-[#1F3A73] font-medium transition-colors flex items-center">
+                        <a href="/verification" class="nav-link-dark font-medium flex items-center">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                            </svg>
+                            Verifikasi
+                        </a>
+                        <a href="/sewaktu" class="nav-link-dark font-medium flex items-center">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                            </svg>
+                            TUK Sewaktu
+                        </a>
+                        <a href="/mandiri" class="nav-link-dark font-medium flex items-center">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                            </svg>
+                            TUK Mandiri
+                        </a>
+                        <a href="/archive" class="nav-link-dark font-medium flex items-center">
                             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 19a2 2 0 01-2-2V7a2 2 0 012-2h4l2 2h4a2 2 0 012 2v1M5 19h14a2 2 0 002-2v-5a2 2 0 00-2-2H9a2 2 0 00-2 2v5a2 2 0 01-2 2z"/>
                             </svg>
-                            Archive
+                            Arsip
                         </a>
-                        @if (auth()->user() && in_array(auth()->user()->role, ['direktur', 'validator']))
-                            <a href="{{ auth()->user()->role === 'direktur' ? '/confirm' : '/validation' }}"
-                               class="text-gray-800 hover:text-[#C1272D] font-medium transition-colors flex items-center">
-                                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                                </svg>
-                                {{ auth()->user()->role === 'direktur' ? 'Konfirmasi' : 'Validasi' }}
-                            </a>
-                        @endif
+                        <a href="/confirm" class="nav-link-dark font-medium flex items-center">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                            Konfirmasi
+                        </a>
                     </nav>
 
-                    <!-- User Menu & Logout -->
+                    <!-- User Menu -->
                     <div class="flex items-center space-x-3">
-                        @if (auth()->user())
-                            <div class="hidden md:flex items-center space-x-2 px-3 py-2 bg-gradient-to-r from-[#1F3A73] to-[#3F5FA8] rounded-full">
-                                <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                                <span class="text-white text-sm font-medium">
-                                    @php
-    $role = auth()->user()->role;
+                        @if(auth()->check())
+                            <div class="text-right">
+                                <p class="text-sm font-medium text-white">Halo, {{ auth()->user()->name }}</p>
+                                @php
+                                    $role = auth()->user()->role ?? 'User';
+                                    $words = explode(' ', $role);
 
-    // Replace underscore with space + remove numbers
-    $role = preg_replace('/[0-9]/', '', str_replace('_', ' ', $role));
+                                    // Capitalize each word, except if word is 'lsp'
+                                    $words = array_map(function($w) {
+                                        return strtolower($w) === 'lsp' ? 'LSP' : ucfirst(strtolower($w));
+                                    }, $words);
 
-    // Split words
-    $words = explode(' ', $role);
+                                    // Join back
+                                    $roleFormatted = implode(' ', $words);
+                                @endphp
 
-    // Capitalize each word, except if word is 'lsp'
-    $words = array_map(function($w) {
-        return strtolower($w) === 'lsp' ? 'LSP' : ucfirst(strtolower($w));
-    }, $words);
-
-    // Join back
-    $roleFormatted = implode(' ', $words);
-@endphp
-
-<span class="text-white text-sm font-medium">
-    {{ $roleFormatted }}
-</span>
-
+                                <span class="text-gray-300 text-sm font-medium">
+                                    {{ $roleFormatted }}
                                 </span>
                             </div>
+                            <a href="{{ route('logout') }}"
+                               class="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white rounded-lg transition-all duration-200 transform hover:scale-105 shadow-md hover:shadow-lg">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+                                </svg>
+                                <span class="font-medium">Logout</span>
+                            </a>
                         @endif
-                        <a href="{{ route('logout') }}"
-                           class="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white rounded-lg transition-all duration-200 transform hover:scale-105 shadow-md hover:shadow-lg">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
-                            </svg>
-                            <span class="font-medium">Logout</span>
-                        </a>
                     </div>
                 </div>
             </div>
@@ -270,8 +391,8 @@
     <!-- Success Message -->
     @if (session('success'))
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
-            <div class="bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200 text-green-800 px-6 py-4 rounded-xl shadow-sm flex items-center animate-slideDown">
-                <svg class="w-6 h-6 mr-3 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="success-dark px-6 py-4 rounded-xl flex items-center animate-slideDown">
+                <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
                 </svg>
                 <p class="font-medium">{!! session('success') !!}</p>
@@ -285,16 +406,16 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-white/70 backdrop-blur-lg border-t border-gray-200/50 mt-12">
+    <footer class="footer-dark mt-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
             <div class="flex flex-col md:flex-row justify-between items-center">
                 <div class="text-center md:text-left">
-                    <p class="text-sm text-gray-700">© 2024 LSP LPK Gataksindo</p>
-                    <p class="text-xs text-gray-600">Sistem Verifikasi TUK v1.0.0</p>
+                    <p class="text-sm text-gray-300">© 2024 LSP LPK Gataksindo</p>
+                    <p class="text-xs text-gray-400">Sistem Verifikasi TUK v1.0.0</p>
                 </div>
                 <div class="flex items-center space-x-2 mt-4 md:mt-0">
                     <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                    <span class="text-sm text-gray-700">System Online</span>
+                    <span class="text-sm text-gray-300">System Online</span>
                 </div>
             </div>
         </div>
