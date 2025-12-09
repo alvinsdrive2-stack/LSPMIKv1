@@ -121,7 +121,7 @@
                         <div class="absolute inset-0 bg-blue-500/20 blur-2xl rounded-full scale-150 animate-pulse"></div>
                         <img
                             src="/images/logo-banner.png"
-                            alt="LSP LPK Gataksindo Logo"
+                            alt="LSP LPK MIK Logo"
                             class="relative w-40 h-40 lg:w-48 lg:h-48 object-contain drop-shadow-2xl"
                         />
                     </div>
@@ -134,7 +134,7 @@
                     SISTEM VERIFIKASI TUK
                 </h2>
                 <p class="text-xl sm:text-2xl text-gray-700 font-medium max-w-3xl mx-auto px-4 fade-in" style="animation-delay: 0.5s;">
-                    Lembaga Sertifikasi Profesi LPK Gataksindo
+                    Lembaga Sertifikasi Profesi LPK MIK
                 </p>
             </div>
         </header>
@@ -303,7 +303,7 @@
             <div class="container mx-auto px-4">
                 <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
                     <div class="text-center md:text-left">
-                        <p class="text-lg font-semibold">© 2024 LSP LPK Gataksindo</p>
+                        <p class="text-lg font-semibold">© 2024 LSP LPK MIK</p>
                         <p class="text-sm text-gray-400">All rights reserved</p>
                     </div>
                     <div class="flex items-center space-x-6">

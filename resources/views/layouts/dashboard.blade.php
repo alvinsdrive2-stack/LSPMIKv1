@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ $title ?? 'Dashboard' }} - LSP LPK Gataksindo</title>
+    <title>{{ $title ?? 'Dashboard' }} - LSP LPK MIK</title>
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="{{ asset('images/logo-banner.png') }}">
@@ -195,10 +195,10 @@
                 <div class="flex items-center space-x-4">
                     <!-- Logo -->
                     <div class="flex items-center">
-                        <img src="/images/logo-banner.png" alt="LSP LPK Gataksindo" class="w-10 h-10 object-contain">
+                        <img src="/images/logo-banner.png" alt="LSP LPK MIK" class="w-10 h-10 object-contain">
                         <div class="ml-3">
                             <h1 class="text-xl font-bold text-[#1F3A73]">{{ $pageTitle ?? 'Dashboard' }}</h1>
-                            <p class="text-xs text-gray-700">Lembaga Sertifikasi Profesi LPK Gataksindo</p>
+                            <p class="text-xs text-gray-700">Lembaga Sertifikasi Profesi LPK MIK</p>
                         </div>
                     </div>
                 </div>
@@ -289,7 +289,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
             <div class="flex flex-col md:flex-row justify-between items-center">
                 <div class="text-center md:text-left">
-                    <p class="text-sm text-gray-700">© 2024 LSP LPK Gataksindo</p>
+                    <p class="text-sm text-gray-700">© 2024 LSP LPK MIK</p>
                     <p class="text-xs text-gray-600">Sistem Verifikasi TUK v1.0.0</p>
                 </div>
                 <div class="flex items-center space-x-2 mt-4 md:mt-0">

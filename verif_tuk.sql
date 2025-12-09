@@ -320,7 +320,7 @@ CREATE TABLE `qr_config` (
 
 INSERT INTO `qr_config` (`id`, `name`, `base_url`, `is_active`, `description`, `created_at`, `updated_at`) VALUES
 (1, 'production', 'https://veriftuk.lsplpkmik.id/qr/', 1, 'Production QR verification URL', '2025-12-04 08:26:13', '2025-12-04 08:26:13'),
-(2, 'development', 'https://verif-tuk.lsplpkgataksindo.id/qr/', 1, 'Local development URL', '2025-12-04 08:26:13', '2025-12-04 08:26:13'),
+(2, 'development', 'https://verif-tuk.lsplpkMIK.id/qr/', 1, 'Local development URL', '2025-12-04 08:26:13', '2025-12-04 08:26:13'),
 (3, 'staging', 'https://staging-barcode.lspgatensi.id/', 1, 'Staging environment URL', '2025-12-04 08:26:13', '2025-12-04 08:26:13');
 
 -- --------------------------------------------------------

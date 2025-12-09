@@ -155,8 +155,8 @@
         <p class="text-blue-200 text-sm">
             Butuh bantuan? Hubungi IT Support
         </p>
-        <a href="mailto:support@lsp-gataksindo.com" class="text-white hover:text-blue-200 transition-colors text-sm font-medium">
-            support@lsp-gataksindo.com
+        <a href="mailto:support@lsp-MIK.com" class="text-white hover:text-blue-200 transition-colors text-sm font-medium">
+            support@lsp-MIK.com
         </a>
     </div>
 

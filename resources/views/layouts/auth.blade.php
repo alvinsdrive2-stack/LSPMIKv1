@@ -3,12 +3,12 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="description" content="Login - Sistem Verifikasi TUK - LSP LPK Gataksindo" />
+        <meta name="description" content="Login - Sistem Verifikasi TUK - LSP LPK MIK" />
 
         <!-- Favicon -->
         <link rel="icon" type="image/png" href="{{ asset('images/logo-banner.png') }}">
 
-        <title>@yield('title', 'Login') - LSP LPK Gataksindo</title>
+        <title>@yield('title', 'Login') - LSP LPK MIK</title>
         @vite('resources/css/app.css')
 
         <style>
@@ -252,10 +252,15 @@
             }
 
             .loader-logo {
-                width: 80px;
-                height: 80px;
+                width: 120px;
+                height: 120px;
                 margin-bottom: 20px;
                 animation: pulse 2s infinite;
+                object-fit: contain;
+                background: white;
+                padding: 15px;
+                border-radius: 20px;
+                box-shadow: 0 8px 32px rgba(31, 58, 115, 0.3);
             }
 
             .loader-spinner {
@@ -309,11 +314,13 @@
                 <!-- Left Side - Branding -->
                 <div class="text-center lg:text-left slide-in-up">
                     <div class="mb-8">
-                        <img
-                            src="/images/logo-banner.png"
-                            alt="LSP LPK Gataksindo Logo"
-                            class="w-32 h-32 lg:w-40 lg:h-40 mx-auto lg:mx-0 object-contain drop-shadow-2xl"
-                        />
+                        <div class="w-32 h-32 lg:w-40 lg:h-40 mx-auto lg:mx-0 bg-white rounded-2xl p-4 shadow-2xl inline-flex items-center justify-center">
+                            <img
+                                src="/images/logo-banner.png"
+                                alt="LSP LPK MIK Logo"
+                                class="w-full h-full object-contain"
+                            />
+                        </div>
                     </div>
                     <h1 class="text-4xl lg:text-6xl font-black text-white mb-4">
                         SELAMAT DATANG
@@ -322,7 +329,7 @@
                         Sistem Verifikasi TUK
                     </p>
                     <p class="text-lg text-blue-200/80 max-w-lg mx-auto lg:mx-0">
-                        Lembaga Sertifikasi Profesi LPK Gataksindo
+                        Lembaga Sertifikasi Profesi LPK MIK
                     </p>
 
                     @hasSection('roleBadge')

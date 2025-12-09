@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ $title ?? 'Dashboard' }} - LSP LPK Gataksindo</title>
+    <title>{{ $title ?? 'Dashboard' }} - LSP LPK MIK</title>
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="{{ asset('images/logo-banner.png') }}">
@@ -70,10 +70,15 @@
         }
 
         .loader-logo {
-            width: 80px;
-            height: 80px;
+            width: 120px;
+            height: 120px;
             margin-bottom: 20px;
             animation: pulse 2s infinite;
+            object-fit: contain;
+            background: white;
+            padding: 15px;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(31, 58, 115, 0.3);
         }
 
         .loader-spinner {
@@ -309,10 +314,12 @@
                 <div class="flex items-center space-x-4">
                     <!-- Logo -->
                     <div class="flex items-center">
-                        <img src="/images/logo-banner.png" alt="LSP LPK Gataksindo" class="w-10 h-10 object-contain">
+                        <div class="w-10 h-10 bg-white rounded-lg p-1.5 border border-white/20 shadow-lg">
+                            <img src="/images/logo-banner.png" alt="LSP LPK MIK" class="w-full h-full object-contain">
+                        </div>
                         <div class="ml-3">
                             <h1 class="text-xl font-bold text-white">{{ $pageTitle ?? 'Dashboard' }}</h1>
-                            <p class="text-xs text-gray-300">Lembaga Sertifikasi Profesi LPK Gataksindo</p>
+                            <p class="text-xs text-gray-300">Lembaga Sertifikasi Profesi LPK MIK</p>
                         </div>
                     </div>
                 </div>
@@ -410,7 +417,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
             <div class="flex flex-col md:flex-row justify-between items-center">
                 <div class="text-center md:text-left">
-                    <p class="text-sm text-gray-300">© 2024 LSP LPK Gataksindo</p>
+                    <p class="text-sm text-gray-300">© 2024 LSP LPK MIK</p>
                     <p class="text-xs text-gray-400">Sistem Verifikasi TUK v1.0.0</p>
                 </div>
                 <div class="flex items-center space-x-2 mt-4 md:mt-0">

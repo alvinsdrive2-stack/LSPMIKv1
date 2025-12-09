@@ -167,8 +167,8 @@ private function createTempFile(string $prefix = '', string $suffix = ''): strin
         $fpdi = new Fpdi();
 
         // Set document information (Optional)
-        $fpdi->SetCreator('LSP LPK Gataksindo');
-        $fpdi->SetAuthor('LSP LPK Gataksindo');
+        $fpdi->SetCreator('LSP LPK MIK');
+        $fpdi->SetAuthor('LSP LPK MIK');
         
         // Load the existing PDF
         $pageCount = $fpdi->setSourceFile($tempFpdiPath);
@@ -558,8 +558,8 @@ private function createTempFile(string $prefix = '', string $suffix = ''): strin
         $fpdiPaperless = new Fpdi();
 
         // Set document information (Optional)
-        $fpdiPaperless->SetCreator('LSP LPK Gataksindo');
-        $fpdiPaperless->SetAuthor('LSP LPK Gataksindo');
+        $fpdiPaperless->SetCreator('LSP LPK MIK');
+        $fpdiPaperless->SetAuthor('LSP LPK MIK');
         
         // Load the existing PDF
         $paperlessCount = $fpdiPaperless->setSourceFile($tempPaperlessPath);
@@ -1065,8 +1065,8 @@ private function createTempFile(string $prefix = '', string $suffix = ''): strin
         $fpdi = new Fpdi();
 
         // Set document information (Optional)
-        $fpdi->SetCreator('LSP LPK Gataksindo');
-        $fpdi->SetAuthor('LSP LPK Gataksindo');
+        $fpdi->SetCreator('LSP LPK MIK');
+        $fpdi->SetAuthor('LSP LPK MIK');
         
         // Load the existing PDF
         $pageCount = $fpdi->setSourceFile($tempFpdiPath);
@@ -1152,8 +1152,8 @@ private function createTempFile(string $prefix = '', string $suffix = ''): strin
         $fpdiPaperless = new Fpdi();
 
         // Set document information (Optional)
-        $fpdiPaperless->SetCreator('LSP LPK Gataksindo');
-        $fpdiPaperless->SetAuthor('LSP LPK Gataksindo');
+        $fpdiPaperless->SetCreator('LSP LPK MIK');
+        $fpdiPaperless->SetAuthor('LSP LPK MIK');
         
         // Load the existing PDF
         $paperlessCount = $fpdiPaperless->setSourceFile($tempPaperlessPath);
@@ -1254,8 +1254,8 @@ private function createTempFile(string $prefix = '', string $suffix = ''): strin
         $fpdi = new Fpdi();
 
         // Set document information (Optional)
-        $fpdi->SetCreator('LSP LPK Gataksindo');
-        $fpdi->SetAuthor('LSP LPK Gataksindo');
+        $fpdi->SetCreator('LSP LPK MIK');
+        $fpdi->SetAuthor('LSP LPK MIK');
         
         // Load the existing PDF
         $pageCount = $fpdi->setSourceFile($tempFpdiPath);
@@ -1341,8 +1341,8 @@ private function createTempFile(string $prefix = '', string $suffix = ''): strin
         $fpdiPaperless = new Fpdi();
 
         // Set document information (Optional)
-        $fpdiPaperless->SetCreator('LSP LPK Gataksindo');
-        $fpdiPaperless->SetAuthor('LSP LPK Gataksindo');
+        $fpdiPaperless->SetCreator('LSP LPK MIK');
+        $fpdiPaperless->SetAuthor('LSP LPK MIK');
         
         // Load the existing PDF
         $paperlessCount = $fpdiPaperless->setSourceFile($tempPaperlessPath);
@@ -1699,8 +1699,8 @@ private function createTempFile(string $prefix = '', string $suffix = ''): strin
         $fpdi = new Fpdi();
 
         // Set document information (Optional)
-        $fpdi->SetCreator('LSP LPK Gataksindo');
-        $fpdi->SetAuthor('LSP LPK Gataksindo');
+        $fpdi->SetCreator('LSP LPK MIK');
+        $fpdi->SetAuthor('LSP LPK MIK');
         
         // Load the existing PDF
         $pageCount = $fpdi->setSourceFile($tempFpdiPath);
@@ -2334,8 +2334,8 @@ private function createTempFile(string $prefix = '', string $suffix = ''): strin
         $metodeTerpisah = ($countMetode['Observasi'] ?? 0) > 0 && ($countMetode['Portofolio'] ?? 0) > 0;
 
         $fpdiMerge = new Fpdi();
-        $fpdiMerge->SetCreator('LSP LPK Gataksindo');
-        $fpdiMerge->SetAuthor('LSP LPK Gataksindo');
+        $fpdiMerge->SetCreator('LSP LPK MIK');
+        $fpdiMerge->SetAuthor('LSP LPK MIK');
         $pageCountMerge = $fpdiMerge->setSourceFile($finalMergedPath);
    
          for ($i = 1; $i <= $pageCountMerge; $i++) {
@@ -2380,8 +2380,8 @@ private function createTempFile(string $prefix = '', string $suffix = ''): strin
         
         // ==== Generate PDF without last page ====
         $fpdiNoLastPage = new Fpdi();
-        $fpdiNoLastPage->SetCreator('LSP LPK Gataksindo');
-        $fpdiNoLastPage->SetAuthor('LSP LPK Gataksindo');
+        $fpdiNoLastPage->SetCreator('LSP LPK MIK');
+        $fpdiNoLastPage->SetAuthor('LSP LPK MIK');
         $pageCount = $fpdiNoLastPage->setSourceFile($finalMergedPath);
         if ($request->jenisTUK === 'Sewaktu') {
             $pageCount = $pageCount - 1;

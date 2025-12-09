@@ -3,12 +3,12 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="description" content="Sistem Verifikasi TUK - LSP LPK Gataksindo" />
+        <meta name="description" content="Sistem Verifikasi TUK - LSP LPK MIK" />
 
         <!-- Favicon -->
         <link rel="icon" type="image/png" href="{{ asset('images/logo-banner.png') }}">
 
-        <title>@yield('title', 'Verifikasi TUK') - LSP LPK Gataksindo</title>
+        <title>@yield('title', 'Verifikasi TUK') - LSP LPK MIK</title>
         @vite('resources/css/app.css')
 
         @stack('styles')
@@ -63,10 +63,15 @@
             }
 
             .loader-logo {
-                width: 80px;
-                height: 80px;
+                width: 120px;
+                height: 120px;
                 margin-bottom: 20px;
                 animation: pulse 2s infinite;
+                object-fit: contain;
+                background: white;
+                padding: 15px;
+                border-radius: 20px;
+                box-shadow: 0 8px 32px rgba(31, 58, 115, 0.3);
             }
 
             .loader-spinner {

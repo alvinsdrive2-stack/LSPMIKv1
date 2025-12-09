@@ -111,8 +111,8 @@
         <p class="text-blue-200 text-sm">
             Butuh bantuan? Hubungi Koordinator Verifikasi
         </p>
-        <a href="mailto:verifikasi@lsp-gataksindo.com" class="text-white hover:text-blue-200 transition-colors text-sm font-medium">
-            verifikasi@lsp-gataksindo.com
+        <a href="mailto:verifikasi@lsp-MIK.com" class="text-white hover:text-blue-200 transition-colors text-sm font-medium">
+            verifikasi@lsp-MIK.com
         </a>
     </div>
 

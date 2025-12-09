@@ -113,8 +113,8 @@
         <p class="text-blue-200 text-sm">
             Butuh bantuan? Hubungi Admin TUK
         </p>
-        <a href="mailto:tuk@lsp-gataksindo.com" class="text-white hover:text-blue-200 transition-colors text-sm font-medium">
-            tuk@lsp-gataksindo.com
+        <a href="mailto:tuk@lsp-MIK.com" class="text-white hover:text-blue-200 transition-colors text-sm font-medium">
+            tuk@lsp-MIK.com
         </a>
     </div>
 

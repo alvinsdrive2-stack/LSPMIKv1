@@ -15,7 +15,7 @@
                 </svg>
             </div>
             <h2 class="text-3xl font-bold text-gray-900 mb-2">Registrasi User Baru</h2>
-            <p class="text-gray-600">Tambah user baru ke sistem LSP Gataksindo</p>
+            <p class="text-gray-600">Tambah user baru ke sistem LSP MIK</p>
         </div>
 
         <!-- Success/Error Messages -->

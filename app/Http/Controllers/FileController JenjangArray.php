@@ -206,8 +206,8 @@ class FileController extends Controller
         $fpdi = new Fpdi();
 
         // Set document information (Optional)
-        $fpdi->SetCreator('LSP LPK Gataksindo');
-        $fpdi->SetAuthor('LSP LPK Gataksindo');
+        $fpdi->SetCreator('LSP LPK MIK');
+        $fpdi->SetAuthor('LSP LPK MIK');
         
         // Load the existing PDF
         $pageCount = $fpdi->setSourceFile($tempFpdiPath);
@@ -556,8 +556,8 @@ class FileController extends Controller
 
                 // Initialize FPDI with TCPDF
                 $fpdiSkema = new Fpdi();
-                $fpdiSkema->SetCreator('LSP LPK Gataksindo');
-                $fpdiSkema->SetAuthor('LSP LPK Gataksindo');
+                $fpdiSkema->SetCreator('LSP LPK MIK');
+                $fpdiSkema->SetAuthor('LSP LPK MIK');
                 
                 // Load the existing PDF
                 $pageCount = $fpdiSkema->setSourceFile($tempFpdiSkema);
@@ -861,8 +861,8 @@ class FileController extends Controller
         $fpdi = new Fpdi();
 
         // Set document information (Optional)
-        $fpdi->SetCreator('LSP LPK Gataksindo');
-        $fpdi->SetAuthor('LSP LPK Gataksindo');
+        $fpdi->SetCreator('LSP LPK MIK');
+        $fpdi->SetAuthor('LSP LPK MIK');
         
         // Load the existing PDF
         $pageCount = $fpdi->setSourceFile($tempFpdiPath);
@@ -976,8 +976,8 @@ class FileController extends Controller
 
                 // Initialize FPDI with TCPDF
                 $fpdiSkema = new Fpdi();
-                $fpdiSkema->SetCreator('LSP LPK Gataksindo');
-                $fpdiSkema->SetAuthor('LSP LPK Gataksindo');
+                $fpdiSkema->SetCreator('LSP LPK MIK');
+                $fpdiSkema->SetAuthor('LSP LPK MIK');
                 
                 // Load the existing PDF
                 $pageCount = $fpdiSkema->setSourceFile($tempFpdiSkema);

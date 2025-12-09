@@ -155,8 +155,8 @@
         <p class="text-blue-200 text-sm">
             Butuh bantuan? Hubungi Sekretaris Direktur
         </p>
-        <a href="mailto:sekretariat@lsp-gataksindo.com" class="text-white hover:text-blue-200 transition-colors text-sm font-medium">
-            sekretariat@lsp-gataksindo.com
+        <a href="mailto:sekretariat@lsp-MIK.com" class="text-white hover:text-blue-200 transition-colors text-sm font-medium">
+            sekretariat@lsp-MIK.com
         </a>
     </div>
 

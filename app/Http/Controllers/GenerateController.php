@@ -598,8 +598,8 @@ class GenerateController extends Controller
                 $fpdiSk = new Fpdi();
 
                 // Set document information (Optional)
-                $fpdiSk->SetCreator('LSP LPK Gataksindo');
-                $fpdiSk->SetAuthor('LSP LPK Gataksindo');
+                $fpdiSk->SetCreator('LSP LPK MIK');
+                $fpdiSk->SetAuthor('LSP LPK MIK');
                 
                 // Load the existing PDF
                 $pageCountSk = $fpdiSk->setSourceFile($tempSkPath);
@@ -631,8 +631,8 @@ class GenerateController extends Controller
                 file_put_contents($tempFinalSkPath, $finalSk);
 
                 $mergedPdf = new Fpdi();
-                $mergedPdf->SetCreator(creator: 'LSP LPK Gataksindo');
-                $mergedPdf->SetAuthor('LSP LPK Gataksindo');
+                $mergedPdf->SetCreator(creator: 'LSP LPK MIK');
+                $mergedPdf->SetAuthor('LSP LPK MIK');
 
                 $pageCountMain = $mergedPdf->setSourceFile($tempFinalPdfPath);
                 for ($i = 1; $i <= $pageCountMain; $i++) {

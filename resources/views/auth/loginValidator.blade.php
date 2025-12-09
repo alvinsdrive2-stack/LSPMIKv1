@@ -154,8 +154,8 @@
         <p class="text-blue-200 text-sm">
             Butuh bantuan? Hubungi Koordinator Validator
         </p>
-        <a href="mailto:validator@lsp-gataksindo.com" class="text-white hover:text-blue-200 transition-colors text-sm font-medium">
-            validator@lsp-gataksindo.com
+        <a href="mailto:validator@lsp-MIK.com" class="text-white hover:text-blue-200 transition-colors text-sm font-medium">
+            validator@lsp-MIK.com
         </a>
     </div>
 

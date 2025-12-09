@@ -11,7 +11,7 @@
         <div class="mb-8 flex flex-col sm:flex-row justify-between items-start sm:items-center">
             <div>
                 <h2 class="text-3xl font-bold text-gray-900 mb-2">Manajemen Users</h2>
-                <p class="text-gray-600">Kelola semua pengguna sistem LSP Gataksindo</p>
+                <p class="text-gray-600">Kelola semua pengguna sistem LSP MIK</p>
             </div>
             <div class="mt-4 sm:mt-0 flex space-x-3">
                 <a href="{{ route('register.new') }}"
