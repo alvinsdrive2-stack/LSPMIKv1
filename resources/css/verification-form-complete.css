@@ -1,0 +1,410 @@
+/* VERIFICATION FORM - MENIRU INDEX.BLADE.PHP SEPENUHNYA */
+
+/* Animations dari index */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes bounceSlow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes pulseGlow {
+    0%, 100% {
+        box-shadow: 0 0 20px rgba(255, 107, 53, 0.4);
+    }
+    50% {
+        box-shadow: 0 0 40px rgba(255, 107, 53, 0.6);
+    }
+}
+
+@keyframes bounceIn {
+    0% { transform: scale(0.3); opacity: 0; }
+    50% { transform: scale(1.05); }
+    70% { transform: scale(0.9); }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes policeLineMove {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: -40px 0;
+    }
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.8s ease-out forwards;
+}
+
+.animate-fade-in-up {
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.animate-slide-in-left {
+    animation: slideInLeft 0.8s ease-out forwards;
+}
+
+.animate-slide-in-right {
+    animation: slideInRight 0.8s ease-out forwards;
+}
+
+.animate-slideDown {
+    animation: slideDown 0.5s ease-out forwards;
+}
+
+.animate-bounce-slow {
+    animation: bounceSlow 8s linear infinite;
+}
+
+.animate-delay-100 { animation-delay: 0.1s; opacity: 0; animation-fill-mode: forwards; }
+.animate-delay-200 { animation-delay: 0.2s; opacity: 0; animation-fill-mode: forwards; }
+.animate-delay-300 { animation-delay: 0.3s; opacity: 0; animation-fill-mode: forwards; }
+.animate-delay-400 { animation-delay: 0.4s; opacity: 0; animation-fill-mode: forwards; }
+.animate-delay-500 { animation-delay: 0.5s; opacity: 0; animation-fill-mode: forwards; }
+.animate-delay-600 { animation-delay: 0.6s; opacity: 0; animation-fill-mode: forwards; }
+.animate-delay-700 { animation-delay: 0.7s; opacity: 0; animation-fill-mode: forwards; }
+.animate-delay-800 { animation-delay: 0.8s; opacity: 0; animation-fill-mode: forwards; }
+.animate-delay-900 { animation-delay: 0.9s; opacity: 0; animation-fill-mode: forwards; }
+.animate-delay-1000 { animation-delay: 1s; opacity: 0; animation-fill-mode: forwards; }
+
+/* Glass morphism dari index */
+.glass-dark {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.verification-page {
+    background: linear-gradient(180deg, #f8fafc 0%, #e2e8f0 100%);
+    min-height: 100vh;
+    position: relative;
+    padding: 40px 0;
+}
+
+/* Background pattern dari index */
+.verification-page::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0.05;
+    background-image: url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%231F3A73" fill-opacity="0.4"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');
+}
+
+/* Card styling dari index */
+.card-dark {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.card-dark::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transition: left 0.6s;
+}
+
+.card-dark:hover::before {
+    left: 100%;
+}
+
+.card-dark:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 25px 50px -12px rgba(31, 58, 115, 0.3);
+}
+
+/* Verification item card seperti role-card */
+.verification-item-card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    border-radius: 16px;
+    padding: 20px;
+    cursor: pointer;
+}
+
+.verification-item-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transition: left 0.6s;
+}
+
+.verification-item-card:hover::before {
+    left: 100%;
+}
+
+.verification-item-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 25px 50px -12px rgba(31, 58, 115, 0.3);
+}
+
+.verification-item-card:has(input:checked) {
+    background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+    border-color: #4A90E2;
+}
+
+.verification-item-card:has(input:checked)::after {
+    content: '';
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 24px;
+    height: 24px;
+    background: #4A90E2;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: bounceIn 0.6s ease-out;
+}
+
+.verification-item-card:has(input:checked)::after {
+    content: '✓';
+    color: white;
+    font-weight: bold;
+}
+
+/* Icon wrapper dari index */
+.icon-wrapper {
+    transition: all 0.3s ease;
+}
+
+.verification-item-card:hover .icon-wrapper {
+    transform: scale(1.1) rotate(5deg);
+}
+
+/* Pulse glow effect */
+.pulse-icon {
+    animation: pulseGlow 2s ease-in-out infinite;
+}
+
+/* Police line container */
+.police-line-container {
+    position: relative;
+    height: 7px;
+    background: #374151;
+    overflow: hidden;
+    width: 40%;
+    margin: 0 auto;
+    border-radius: 4px;
+}
+
+.police-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        90deg,
+        #000000 0px,
+        #000000 20px,
+        #FFD700 20px,
+        #FFD700 40px
+    );
+    animation: policeLineMove 1.2s linear infinite;
+}
+
+/* Dark background section dengan decorative elements */
+.dark-section {
+    background: linear-gradient(to bottom, #111827, #1f2937);
+    position: relative;
+    overflow: hidden;
+}
+
+.dark-section::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 128px;
+    height: 128px;
+    background: #FF6B35;
+    border-radius: 50%;
+    filter: blur(3xl);
+    opacity: 0.1;
+}
+
+.dark-section::after {
+    content: '';
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    width: 192px;
+    height: 192px;
+    background: #FFD23F;
+    border-radius: 50%;
+    filter: blur(3xl);
+    opacity: 0.1;
+}
+
+/* Button styling dari index */
+.btn-primary-dark {
+    background: linear-gradient(135deg, #FF6B35, #FFD23F);
+    color: white;
+    padding: 16px 40px;
+    font-weight: 600;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary-dark::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.6s;
+}
+
+.btn-primary-dark:hover::before {
+    left: 100%;
+}
+
+.btn-primary-dark:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(255, 107, 53, 0.3);
+}
+
+/* Custom checkbox styling */
+input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    accent-color: #1F3A73;
+    cursor: pointer;
+}
+
+/* Compact container */
+.compact-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* Grid compact */
+.grid-compact {
+    gap: 1.5rem;
+}
+
+/* Success alert styling */
+.alert-success {
+    background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+    border-left: 4px solid #10b981;
+    color: #065f46;
+}
+
+/* Modal styling */
+.modal-content {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Badge styling */
+.badge-wajib {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 12px;
+    background: #fef2f2;
+    color: #dc2626;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-radius: 9999px;
+    border: 1px solid #fecaca;
+}
+
+/* Responsive dari index */
+@media (max-width: 768px) {
+    .compact-container {
+        padding: 0 0.5rem;
+    }
+
+    .grid-compact {
+        gap: 1rem;
+    }
+
+    .card-dark {
+        padding: 1rem;
+    }
+
+    .verification-item-card {
+        padding: 1rem;
+    }
+}

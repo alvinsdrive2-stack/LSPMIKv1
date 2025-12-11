@@ -5,7 +5,11 @@
       "Bash(php artisan migrate:*)",
       "Bash(php artisan make:middleware:*)",
       "Bash(php artisan make:controller:*)",
-      "Bash(findstr:*)"
+      "Bash(findstr:*)",
+      "mcp__playwright__browser_snapshot",
+      "mcp__playwright__browser_take_screenshot",
+      "mcp__playwright__browser_navigate",
+      "WebSearch"
     ],
     "deny": [],
     "ask": []

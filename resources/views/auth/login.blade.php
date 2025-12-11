@@ -1,90 +1,24 @@
 @extends('layouts.auth')
 
-@section('title', 'Login Admin')
-
-@section('roleBadge')
-    <div class="inline-flex items-center px-6 py-3 bg-white/10 backdrop-blur rounded-full border border-white/20">
-        <svg class="w-6 h-6 text-yellow-400 mr-3" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-        </svg>
-        <span class="text-white font-semibold">Administrator</span>
-    </div>
-@endsection
+@section('title', 'Login')
 
 @section('content')
     <div class="text-center mb-8">
-        <h2 class="text-3xl font-bold text-white mb-2">Login Admin LSP</h2>
-        <p class="text-blue-200">Masuk untuk mengelola sistem verifikasi</p>
+        <h2 class="text-4xl font-bold bg-gradient-to-r from-gray-900 via-gray-700 to-gray-900 bg-clip-text text-transparent mb-3">Selamat Datang Kembali</h2>
+        <p class="text-gray-600 text-lg">Masuk ke akun Anda untuk melanjutkan</p>
     </div>
 
-    @if(session('error') || $errors->any())
-        <div class="alert-error bg-red-500/20 border border-red-500/50 text-red-100 px-4 py-3 rounded-lg mb-6 slide-in-delay-1 {{ session('blocked') ? 'animate-pulse' : 'shake-animation' }}" id="alertBox">
-            <div class="flex items-center justify-between">
-                <div class="flex items-center">
-                    @if(session('blocked'))
-                        <svg class="w-6 h-6 mr-3 flex-shrink-0 animate-spin-slow" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
-                        </svg>
-                    @else
-                        <svg class="w-5 h-5 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
-                        </svg>
-                    @endif
-                    <div>
-                        <p class="font-medium text-lg">
-                            @if(session('blocked'))
-                                Akun Diblokir Sementara
-                            @else
-                                Login Gagal!
-                            @endif
-                        </p>
-                        <p class="text-sm mt-1">{{ session('error') }}</p>
-
-                        @if(session('attempts') && session('max_attempts'))
-                            <div class="mt-3">
-                                <div class="flex items-center space-x-2">
-                                    <span class="text-xs">Percobaan tersisa:</span>
-                                    <div class="flex space-x-1">
-                                        @for($i = 1; $i <= session('max_attempts'); $i++)
-                                            @if($i <= session('attempts'))
-                                                <span class="w-2 h-2 bg-red-400 rounded-full"></span>
-                                            @else
-                                                <span class="w-2 h-2 bg-white/30 rounded-full"></span>
-                                            @endif
-                                        @endfor
-                                    </div>
-                                    <span class="text-xs font-bold">{{ session('max_attempts') - session('attempts') }}/{{ session('max_attempts') }}</span>
-                                </div>
-                            </div>
-                        @endif
-                    </div>
-                </div>
-
-                @if(session('blocked') && session('remaining_time'))
-                    <div class="text-right ml-4">
-                        <div class="text-xs text-red-200">Coba lagi dalam:</div>
-                        <div id="countdown" class="text-2xl font-bold font-mono" data-time="{{ session('remaining_time') }}">
-                            {{ session('remaining_time') }}s
-                        </div>
-                    </div>
-                @endif
-            </div>
-        </div>
-    @endif
-
-    <form action="{{ route('login') }}" method="POST" class="space-y-6 slide-in-delay-2" id="loginForm">
+    <form action="{{ route('login') }}" method="POST" class="space-y-5" id="loginForm">
         @csrf
 
         <!-- Email Field -->
-        <div>
-            <label for="email" class="block text-sm font-medium text-blue-100 mb-2">
-                Email Address
+        <div class="space-y-2">
+            <label for="email" class="block text-sm font-semibold text-gray-700">
+                <i class="fas fa-envelope text-gray-400 mr-2"></i>Email Address
             </label>
-            <div class="relative">
-                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-                    </svg>
+            <div class="relative group">
+                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                    <i class="fas fa-at text-gray-400 group-focus-within:text-blue-500 transition-colors"></i>
                 </div>
                 <input
                     id="email"
@@ -92,26 +26,28 @@
                     type="email"
                     autocomplete="email"
                     required
-                    class="custom-input w-full pl-10 pr-3 py-3 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none"
-                    placeholder="Email"
+                    class="w-full pl-12 pr-4 py-4 bg-gray-50 border-2 border-gray-200 rounded-xl text-gray-900 placeholder-gray-400 focus:outline-none focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200 autofill:bg-white"
+                    placeholder="nama@email.com"
                     value="{{ old('email') }}"
+                    style="-webkit-appearance: none; appearance: none;"
                 >
+                <div class="absolute inset-0 rounded-xl bg-gradient-to-r from-blue-500/0 to-purple-500/0 group-focus-within:from-blue-500/5 group-focus-within:to-purple-500/5 pointer-events-none transition-all duration-300"></div>
             </div>
             @error('email')
-                <p class="mt-2 text-sm text-red-200">{{ $message }}</p>
+                <p class="mt-1.5 text-sm text-red-600 flex items-center">
+                    <i class="fas fa-exclamation-circle mr-1.5"></i>{{ $message }}
+                </p>
             @enderror
         </div>
 
         <!-- Password Field -->
-        <div>
-            <label for="password" class="block text-sm font-medium text-blue-100 mb-2">
-                Password
+        <div class="space-y-2">
+            <label for="password" class="block text-sm font-semibold text-gray-700">
+                <i class="fas fa-lock text-gray-400 mr-2"></i>Password
             </label>
-            <div class="relative">
-                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
-                    </svg>
+            <div class="relative group">
+                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                    <i class="fas fa-key text-gray-400 group-focus-within:text-blue-500 transition-colors"></i>
                 </div>
                 <input
                     id="password"
@@ -119,99 +55,153 @@
                     type="password"
                     autocomplete="current-password"
                     required
-                    class="custom-input w-full pl-10 pr-10 py-3 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none"
-                    placeholder="Password"
+                    class="w-full pl-12 pr-14 py-4 bg-gray-50 border-2 border-gray-200 rounded-xl text-gray-900 placeholder-gray-400 focus:outline-none focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200 autofill:bg-white"
+                    placeholder="Masukkan password Anda"
+                    style="-webkit-appearance: none; appearance: none;"
                 >
                 <button
                     type="button"
-                    class="absolute inset-y-0 right-0 pr-3 flex items-center"
+                    class="absolute inset-y-0 right-0 pr-4 flex items-center group"
                     onclick="togglePassword('password')"
                 >
-                    <svg id="password-toggle" class="h-5 w-5 text-gray-400 hover:text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
-                    </svg>
+                    <i id="password-toggle" class="fas fa-eye text-gray-400 hover:text-blue-500 group-focus-within:text-blue-500 transition-all duration-200 cursor-pointer"></i>
                 </button>
+                <div class="absolute inset-0 rounded-xl bg-gradient-to-r from-blue-500/0 to-purple-500/0 group-focus-within:from-blue-500/5 group-focus-within:to-purple-500/5 pointer-events-none transition-all duration-300"></div>
             </div>
             @error('password')
-                <p class="mt-2 text-sm text-red-200">{{ $message }}</p>
+                <p class="mt-1.5 text-sm text-red-600 flex items-center">
+                    <i class="fas fa-exclamation-circle mr-1.5"></i>{{ $message }}
+                </p>
             @enderror
         </div>
 
-        <!-- Remember Me -->
-        
-
         <!-- Submit Button -->
-        <button type="submit" id="submitBtn" class="btn-primary w-full py-3 px-4 rounded-lg text-white font-semibold text-lg flex items-center justify-center transition-all duration-300">
-            <span id="btnText">Login</span>
-            <svg id="btnIcon" class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
-            </svg>
+        <button type="submit" id="submitBtn" class="group relative w-full py-4 px-6 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></div>
+            <span id="btnText" class="relative flex items-center text-lg">
+                <i class="fas fa-sign-in-alt mr-3"></i>
+                Masuk
+            </span>
         </button>
     </form>
 
+    <!-- Back to Home -->
+    <div class="mt-8 text-center">
+        <a href="/" class="inline-flex items-center text-gray-500 hover:text-gray-700 transition-colors text-sm group">
+            <i class="fas fa-arrow-left w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform duration-200"></i>
+            <span class="border-b border-gray-300 group-hover:border-gray-700 transition-colors duration-200">Kembali ke Beranda</span>
+        </a>
+    </div>
+
     <!-- Additional Info -->
-    <div class="mt-8 text-center slide-in-delay-3">
-        <p class="text-blue-200 text-sm">
-            Butuh bantuan? Hubungi IT Support
-        </p>
-        <a href="mailto:support@lsp-MIK.com" class="text-white hover:text-blue-200 transition-colors text-sm font-medium">
+    <div class="mt-6 p-4 bg-gray-50 rounded-xl">
+        <div class="flex items-center justify-center space-x-2 text-gray-500">
+            <i class="fas fa-info-circle"></i>
+            <p class="text-sm">Butuh bantuan?</p>
+        </div>
+        <a href="mailto:support@lsp-MIK.com" class="text-blue-600 hover:text-blue-700 transition-colors text-sm font-medium flex items-center justify-center mt-1">
+            <i class="fas fa-envelope mr-2"></i>
             support@lsp-MIK.com
         </a>
     </div>
 
-    <script>
-        // Check if user is blocked
-        let countdownTimer;
-        const blockedAlert = document.querySelector('.animate-pulse');
-        const countdownEl = document.getElementById('countdown');
-        const loginForm = document.getElementById('loginForm');
-        const submitBtn = document.getElementById('submitBtn');
-        const btnText = document.getElementById('btnText');
-        const btnIcon = document.getElementById('btnIcon');
-
-        if (blockedAlert && countdownEl) {
-            let timeLeft = parseInt(countdownEl.dataset.time);
-
-            // Disable form inputs
-            const inputs = loginForm.querySelectorAll('input');
-            inputs.forEach(input => input.disabled = true);
-
-            // Disable submit button
-            submitBtn.disabled = true;
-            submitBtn.classList.add('opacity-50', 'cursor-not-allowed');
-            btnText.textContent = 'Diblokir';
-            btnIcon.innerHTML = `
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
-            `;
-
-            countdownTimer = setInterval(() => {
-                timeLeft--;
-                countdownEl.textContent = timeLeft + 's';
-
-                if (timeLeft <= 0) {
-                    clearInterval(countdownTimer);
-                    window.location.reload();
-                }
-            }, 1000);
+    <style>
+        /* Custom autofill styles */
+        input:-webkit-autofill,
+        input:-webkit-autofill:hover,
+        input:-webkit-autofill:focus,
+        input:-webkit-autofill:active {
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: #111827;
+            background-color: white !important;
+            background-image: none !important;
+            transition: background-color 5000s ease-in-out 0s;
+            box-shadow: inset 0 0 0 2px #3b82f6;
+            border-radius: 0.75rem;
         }
 
+        input:autofill,
+        input:autofill:hover,
+        input:autofill:focus,
+        input:autofill:active {
+            background-color: white !important;
+            background-image: none !important;
+            transition: background-color 5000s ease-in-out 0s;
+            box-shadow: inset 0 0 0 2px #3b82f6;
+        }
+
+        /* Chrome/Safari specific dropdown styling */
+        input::-webkit-credentials-auto-fill-button,
+        input::-webkit-caps-lock-indicator,
+        input::-webkit-contacts-auto-fill-button,
+        input::-webkit-strong-password-auto-fill-button {
+            background-color: #3b82f6;
+            color: white;
+            border-radius: 0.375rem;
+            margin: 0.5rem;
+            padding: 0.25rem 0.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        /* Dropdown menu styling */
+        input::-webkit-calendar-picker-indicator {
+            background-color: #3b82f6;
+            color: white;
+            border-radius: 0.375rem;
+            padding: 0.25rem;
+            margin: 0.25rem;
+            cursor: pointer;
+        }
+
+        /* Loading state animation */
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .loading-state {
+            animation: spin 1s linear infinite;
+        }
+    </style>
+
+    <script>
         function togglePassword(inputId) {
             const input = document.getElementById(inputId);
             const toggle = document.getElementById(inputId + '-toggle');
 
             if (input.type === 'password') {
                 input.type = 'text';
-                toggle.innerHTML = `
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"/>
-                `;
+                toggle.classList.remove('fa-eye');
+                toggle.classList.add('fa-eye-slash');
             } else {
                 input.type = 'password';
-                toggle.innerHTML = `
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
-                `;
+                toggle.classList.remove('fa-eye-slash');
+                toggle.classList.add('fa-eye');
             }
         }
+
+        // Handle form submission with loading state
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginForm = document.getElementById('loginForm');
+            const submitBtn = document.getElementById('submitBtn');
+            const btnText = document.getElementById('btnText');
+
+            if (loginForm) {
+                loginForm.addEventListener('submit', function(e) {
+                    // Prevent multiple submissions
+                    if (submitBtn.disabled) {
+                        e.preventDefault();
+                        return;
+                    }
+
+                    // Disable button and show loading state
+                    submitBtn.disabled = true;
+                    btnText.innerHTML = `
+                        <i class="fas fa-spinner fa-spin mr-3"></i>
+                        Masuk...
+                    `;
+                });
+            }
+        });
     </script>
 @endsection

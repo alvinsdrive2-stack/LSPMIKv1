@@ -18,7 +18,7 @@
 
     <!-- DataTables CSS -->
     <link href="https://cdn.datatables.net/v/dt/dt-1.13.4/datatables.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <style>
         /* Dark Mode Page Transition Styles */
@@ -291,14 +291,41 @@
 </head>
 
 <body class="font-sans antialiased">
-    <!-- Page Loader -->
-    <div id="page-loader">
-        <div class="loader-content">
-            <img src="/images/logo-banner.png" alt="Loading..." class="loader-logo">
-            <div class="loader-spinner"></div>
-            <p class="text-lg font-medium">Memuat...</p>
+    <!-- Modal Loading Component -->
+        <div id="loadingModal" class="fixed inset-0 z-50 hidden">
+            <div class="fixed inset-0 bg-white bg-opacity-50 backdrop-blur-sm transition-opacity" id="loadingBackdrop"></div>
+            <div class="fixed inset-0 flex items-center justify-center p-4">
+                <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full mx-4 overflow-hidden transform transition-all duration-500 ease-out" id="loadingContent">
+                    <div class="bg-gradient-to-r from-[#1F3A73] to-[#4A90E2] p-6">
+                        <div class="text-center">
+                            <div class="w-32 h-[72px] mx-auto mb-4 bg-white p-3 rounded-lg shadow-xl flex items-center justify-center">
+                                <img src="/images/logo-banner.png" alt="Loading..." class="w-full h-full object-contain">
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-2">LSP LPK MIK</h3>
+                            <p class="text-blue-100 text-sm">Sistem Verifikasi TUK</p>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-spinner fa-spin text-4xl text-[#1F3A73] mb-4"></i>
+                            <p class="text-gray-700 font-medium">Sistem Sedang Dimuat...</p>
+                            <p class="text-gray-500 text-sm mt-1">Mohon tunggu sebentar</p>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
+                            <div class="bg-gradient-to-r from-[#1F3A73] to-[#4A90E2] h-full rounded-full transition-all duration-300 ease-out"
+                                 id="loadingBar" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 px-6 py-3 border-t">
+                        <div class="flex justify-center space-x-6">
+                            <i class="fas fa-hard-hat text-[#FF6B35] text-xl"></i>
+                            <i class="fas fa-tools text-[#FFD23F] text-xl"></i>
+                            <i class="fas fa-hammer text-[#1F3A73] text-xl"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
 
     <!-- Main Content Wrapper -->
     <div id="app" class="page-transition-enter">
@@ -436,21 +463,75 @@
 
     <!-- Custom JavaScript -->
     <script>
-        // Page loader management
-        window.addEventListener('load', function() {
-            // Hide loader after page loads
-            setTimeout(() => {
-                const loader = document.getElementById('page-loader');
-                const app = document.getElementById('app');
+        // Modal loading management
+        const loadingModal = {
+            show: function() {
+                const modal = document.getElementById('loadingModal');
+                const backdrop = document.getElementById('loadingBackdrop');
+                const content = document.getElementById('loadingContent');
+                const loadingBar = document.getElementById('loadingBar');
 
-                loader.classList.add('hidden');
+                modal.classList.remove('hidden');
+                loadingBar.style.width = '0%';
+
+                // Animate modal appearance
+                setTimeout(() => {
+                    backdrop.classList.add('opacity-100');
+                    content.classList.add('scale-100', 'opacity-100');
+                }, 10);
+
+                // Animate progress bar
+                let progress = 0;
+                const interval = setInterval(() => {
+                    progress += Math.random() * 30;
+                    if (progress > 90) progress = 90;
+                    loadingBar.style.width = progress + '%';
+                }, 300);
+
+                this.progressInterval = interval;
+            },
+
+            hide: function() {
+                const modal = document.getElementById('loadingModal');
+                const backdrop = document.getElementById('loadingBackdrop');
+                const content = document.getElementById('loadingContent');
+                const loadingBar = document.getElementById('loadingBar');
+
+                clearInterval(this.progressInterval);
+                loadingBar.style.width = '100%';
+
+                setTimeout(() => {
+                    // Animate modal sliding down and fading out
+                    content.style.transform = 'translateY(100px) scale(0.95)';
+                    content.style.opacity = '0';
+                    backdrop.classList.remove('opacity-100');
+
+                    setTimeout(() => {
+                        modal.classList.add('hidden');
+                        loadingBar.style.width = '0%';
+                        // Reset transform for next show
+                        content.style.transform = '';
+                        content.style.opacity = '';
+                    }, 500);
+                }, 200);
+            }
+        };
+
+        window.addEventListener('load', function() {
+            // Hide loading modal after page loads
+            setTimeout(() => {
+                const app = document.getElementById('app');
                 app.classList.remove('page-transition-enter');
                 app.classList.add('page-transition-enter-active');
+                loadingModal.hide();
             }, 500);
         });
 
         // Smooth navigation for all internal links
         document.addEventListener('DOMContentLoaded', function() {
+            // Show loading modal initially
+            loadingModal.show();
+
             // Animate elements on load
             const elements = document.querySelectorAll('.animate-fade-in, .animate-slide-in');
             elements.forEach((el, index) => {
@@ -480,16 +561,13 @@
 
                     e.preventDefault();
 
-                    // Show loader with transition
-                    const loader = document.getElementById('page-loader');
+                    // Show loading modal with transition
                     const app = document.getElementById('app');
-
-                    // Start exit animation
                     app.classList.remove('page-transition-enter-active');
                     app.classList.add('page-transition-exit-active');
 
                     setTimeout(() => {
-                        loader.classList.remove('hidden');
+                        loadingModal.show();
                         // Navigate to new page
                         window.location.href = href;
                     }, 300);
@@ -539,8 +617,7 @@
         window.addEventListener('pageshow', function(event) {
             if (event.persisted) {
                 // Page is being restored from cache
-                const loader = document.getElementById('page-loader');
-                loader.classList.add('hidden');
+                loadingModal.hide();
             }
         });
 

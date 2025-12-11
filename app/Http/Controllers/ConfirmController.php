@@ -348,13 +348,13 @@ class ConfirmController extends Controller
             $fpdiPaperless->useTemplate($templatePaperless);
 
             if($index === 1) {
-                $fpdiPaperless->write2DBarcode($qrUrlPaperless1, 'QRCODE,H', 35, 180, 20, 20);
+                $fpdiPaperless->write2DBarcode($qrUrlPaperless1, 'QRCODE,H', 35, 203, 20, 20);
             }
             if (($index === 2 && $verification->filetype === '2') || ($index === 2 && $verification->jenis_tuk === 'Mandiri')) {
-                $fpdiPaperless->write2DBarcode($qrUrlPaperless2, 'QRCODE,H', 30, 180, 20, 20);
+                $fpdiPaperless->write2DBarcode($qrUrlPaperless2, 'QRCODE,H', 30, 245, 20, 20);
             }
             if ($index === 3 && $verification->filetype === '1') {
-                $fpdiPaperless->write2DBarcode($qrUrlPaperless1, 'QRCODE,H', 52, 180, 20, 20);
+                $fpdiPaperless->write2DBarcode($qrUrlPaperless1, 'QRCODE,H', 52, 57, 20, 20);
             }
         }
 
